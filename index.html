@@ -1,99 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Formulario Identifier – iD Myself – HOYALUX</title>
 <style>
   :root{
-    --navy:#0a2d6f; --blue:#0b3d91; --ink:#0f172a; --muted:#475569;
-    --chip:#e2e8f0; --chip-on:#f6e8f3; --chip-on-b:#e7cfe0;
+    --navy:#0a2d6f; --blue:#0b3d91; --grid:#dbe4ff;
+    --ink:#0f172a; --muted:#475569; --chip:#e2e8f0;
+    --accent:#7a2b6c; --accent-bg:#f6e8f3; --accent-b:#e7cfe0;
   }
-  body{margin:0;background:#eef2ff;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Arial}
-  .sheet{max-width:980px;margin:0 auto;background:#fff;box-shadow:0 8px 24px rgba(2,6,23,.15)}
-  header{background:linear-gradient(180deg,#123e92,#0b3d91);color:#fff;padding:18px 22px}
-  h1{font-size:20px;margin:0}
-  section{padding:16px 22px}
-  h2{color:#7a2b6c;font-size:15px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
-  h2::before{content:"";width:12px;height:12px;background:#0b3d91;border-radius:3px}
-  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px 14px}
-  .col-12{grid-column:span 12}.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-3{grid-column:span 3}.col-2{grid-column:span 2}
-  label.small{font-size:12px;color:#475569;display:block;margin-bottom:3px}
-  input[type="text"],input[type="number"],input[type="date"],input[type="tel"]{
-    width:100%;padding:8px 10px;border:1px solid #e5e7eb;border-radius:6px;background:#fff
-  }
-  .row{display:flex;gap:8px;flex-wrap:wrap}
-  .chips{display:flex;gap:8px;flex-wrap:wrap}
-  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--chip);border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer}
+  @page{ size:A4; margin:12mm }
+  body{margin:0;background:#eef2ff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  .sheet{width:210mm;min-height:297mm;margin:0 auto;background:#fff;box-shadow:0 8px 24px rgba(2,6,23,.15)}
+  /* Header */
+  .hero{position:relative;height:220px;overflow:hidden}
+  .hero img{width:100%;height:100%;object-fit:cover;object-position:35% 35%}
+  .hero .band{position:absolute;left:0;right:0;bottom:16px;display:flex;justify-content:center}
+  .hero .title{background:var(--navy);color:#fff;padding:10px 22px;border-radius:8px;font-weight:800;letter-spacing:.06em}
+  /* Secciones */
+  .section{padding:10mm 12mm}
+  .section-title{color:var(--accent);font-weight:800;font-size:13px;margin:0 0 10px;display:flex;gap:10px;align-items:center}
+  .section-title::before{content:"";width:12px;height:12px;background:var(--blue);border-radius:3px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:8px 12px;align-items:end}
+  .col-12{grid-column:span 12}.col-8{grid-column:span 8}.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-3{grid-column:span 3}.col-2{grid-column:span 2}
+  label{font-size:11px;color:var(--muted);display:block;margin-bottom:3px}
+  .line{width:100%;border:none;border-bottom:1px solid var(--grid);padding:6px 2px;background:transparent;color:var(--ink)}
+  .line:focus{outline:none;border-bottom-color:var(--blue)}
+  /* Chips */
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--chip);border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
   .chip input{appearance:none;width:14px;height:14px;border:1px solid #cbd5e1;border-radius:50%}
   .chip input[type="checkbox"]{border-radius:3px}
-  .chip input:checked{background:#7a2b6c;border-color:#7a2b6c}
-  .chip.on{background:var(--chip-on);border-color:var(--chip-on-b)}
-  .sep{height:1px;background:#f1f5f9;margin:10px 0}
-  .btnbar{display:flex;justify-content:flex-end;padding:18px 22px}
-  button{background:#0a2d6f;color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer}
-  .help{color:#64748b;font-size:12px}
+  .chip input:checked{background:var(--accent);border-color:var(--accent)}
+  .chip.on{background:var(--accent-bg);border-color:var(--accent-b)}
+  /* Panel azul */
+  .personal{background:#0b3d91;color:#e6eefc;border-radius:8px;padding:20px 22px}
+  .personal .section-title{color:#fff}.personal .section-title::before{background:#fff}
+  .personal label{color:#e6eefc}.personal .line{border-bottom:1.5px solid rgba(255,255,255,.75);color:#fff}
+  /* Tabla simple */
+  .imp{width:100%;border-collapse:collapse;font-size:12px}
+  .imp th,.imp td{border:1px solid #eef2ff;padding:6px 8px;text-align:center}
+  .imp th{text-align:left;background:#f8fafc}
+  /* Footer */
+  .page-footer{position:fixed;bottom:10mm;left:12mm;right:12mm;display:flex;justify-content:space-between;align-items:center}
+  .logo-hoya{height:18mm}.logo-tech{height:16mm}
+  /* Barra superior */
+  .toolbar{position:sticky;top:0;display:flex;gap:8px;justify-content:flex-end;background:#fff;padding:8px}
+  .btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+  .note{margin-right:auto;color:#64748b;font-size:12px}
 </style>
 </head>
 <body>
-<div class="sheet">
-  <header><h1>FORMULARIO IDENTIFIER · iD MYSELF · HOYALUX</h1></header>
 
-  <!-- ======= FORMULARIO ======= -->
-  <form id="formHoya">
+<!-- iFrame oculto: evita navegar fuera del sitio al enviar -->
+<iframe name="hidden_iframe" style="display:none"></iframe>
+
+<div class="toolbar">
+  <span class="note">Los datos se guardan en Google Sheets</span>
+  <button class="btn" type="button" onclick="window.print()">Imprimir / PDF</button>
+</div>
+
+<!-- ====== FORMULARIO: ENVÍA DIRECTO A APPS SCRIPT ====== -->
+<form
+  action="https://script.google.com/macros/s/AKfycbz8wYVJCHIBZPW2mzkpBkSUdGUzddeNmXcgpZmeTOfHHgiL1WcA1CMHIM8G4CaG5iMGEQ/exec"
+  method="POST"
+  target="hidden_iframe"
+  onsubmit="setTimeout(()=>alert('¡Enviado! Revisa tu Google Sheet.'),300)">
+
+  <div class="sheet">
+
+    <!-- Encabezado con imagen -->
+    <div class="hero">
+      <img src="idmyself_header.jpg" alt="HOYA Header">
+      <div class="band"><div class="title">FORMULARIO IDENTIFIER · iD MYSELF · HOYALUX</div></div>
+    </div>
+
     <!-- Información personal -->
-    <section>
-      <h2>INFORMACIÓN PERSONAL</h2>
+    <section class="section personal">
+      <h3 class="section-title">INFORMACIÓN PERSONAL</h3>
       <div class="grid">
         <div class="col-6">
-          <label class="small">Sistema operativo del cliente</label>
-          <input type="text" name="sistema" placeholder="Android / iOS / Otro">
+          <label>Sistema operativo del cliente</label>
+          <input class="line" name="sistema" placeholder="Android / iOS / Otro">
         </div>
-        <div class="col-3">
-          <label class="small">Nombre</label>
-          <input type="text" name="nombre">
-        </div>
-        <div class="col-3">
-          <label class="small">Apellidos</label>
-          <input type="text" name="apellidos">
-        </div>
+        <div class="col-3"><label>Nombre</label><input class="line" name="nombre"></div>
+        <div class="col-3"><label>Apellidos</label><input class="line" name="apellidos"></div>
         <div class="col-4">
-          <label class="small">Sexo</label>
+          <label>Sexo</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="sexo" value="Masculino">Masculino</label>
             <label class="chip"><input type="radio" name="sexo" value="Femenino">Femenino</label>
           </div>
         </div>
-        <div class="col-4">
-          <label class="small">Fecha de nacimiento</label>
-          <input type="date" name="fecha_nac">
-        </div>
+        <div class="col-4"><label>Fecha de nacimiento</label><input class="line" name="fecha_nac" placeholder="dd/mm/aaaa"></div>
       </div>
     </section>
 
     <!-- Prescripción -->
-    <section>
-      <h2>PRESCRIPCIÓN</h2>
+    <section class="section" style="padding-top:0">
+      <h3 class="section-title">PRESCRIPCIÓN</h3>
       <div class="grid">
         <div class="col-6">
           <div class="grid">
-            <div class="col-3"><label class="small">Esférico OI</label><input type="text" name="esf_oi"></div>
-            <div class="col-3"><label class="small">Cilíndrico OI</label><input type="text" name="cil_oi"></div>
-            <div class="col-3"><label class="small">Eje OI</label><input type="text" name="eje_oi"></div>
-            <div class="col-3"><label class="small">Adición OI</label><input type="text" name="adic_oi"></div>
+            <div class="col-3"><label>Esférico OI</label><input class="line" name="esf_oi"></div>
+            <div class="col-3"><label>Cilíndrico OI</label><input class="line" name="cil_oi"></div>
+            <div class="col-3"><label>Eje OI</label><input class="line" name="eje_oi"></div>
+            <div class="col-3"><label>Adición OI</label><input class="line" name="adic_oi"></div>
           </div>
         </div>
         <div class="col-6">
           <div class="grid">
-            <div class="col-3"><label class="small">Esférico OD</label><input type="text" name="esf_od"></div>
-            <div class="col-3"><label class="small">Cilíndrico OD</label><input type="text" name="cil_od"></div>
-            <div class="col-3"><label class="small">Eje OD</label><input type="text" name="eje_od"></div>
-            <div class="col-3"><label class="small">Adición OD</label><input type="text" name="adic_od"></div>
+            <div class="col-3"><label>Esférico OD</label><input class="line" name="esf_od"></div>
+            <div class="col-3"><label>Cilíndrico OD</label><input class="line" name="cil_od"></div>
+            <div class="col-3"><label>Eje OD</label><input class="line" name="eje_od"></div>
+            <div class="col-3"><label>Adición OD</label><input class="line" name="adic_od"></div>
           </div>
         </div>
 
         <div class="col-4">
-          <label class="small">¿Prisma OI?</label>
+          <label>¿Prisma OI?</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="prisma_oi" value="Sí">Sí</label>
             <label class="chip"><input type="radio" name="prisma_oi" value="No">No</label>
@@ -101,7 +127,7 @@
         </div>
 
         <div class="col-4">
-          <label class="small">¿Primer par de lentes?</label>
+          <label>¿Primer par de lentes?</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="primer_par" value="Sí">Sí</label>
             <label class="chip"><input type="radio" name="primer_par" value="No">No</label>
@@ -111,162 +137,275 @@
     </section>
 
     <!-- Información del prisma -->
-    <section>
-      <h2>INFORMACIÓN DEL PRISMA</h2>
+    <section class="section" style="padding-top:0">
+      <h3 class="section-title">INFORMACIÓN DEL PRISMA</h3>
       <div class="grid">
+        <!-- OI -->
         <div class="col-6">
           <div class="grid">
-            <div class="col-4"><label class="small">Horizontal OI (mm)</label><input type="text" name="prisma_h_oi_val"></div>
-            <div class="col-8">
-              <label class="small">Orientación horizontal OI</label>
+            <div class="col-4"><label>Horizontal OI (mm)</label><input class="line" name="prisma_h_oi_val"></div>
+            <div class="col-8"><label>Orientación horizontal OI</label>
               <div class="chips">
                 <label class="chip"><input type="radio" name="horiz_oi" value="Nasal">Nasal</label>
                 <label class="chip"><input type="radio" name="horiz_oi" value="Temporal">Temporal</label>
               </div>
             </div>
-
-            <div class="col-4"><label class="small">Vertical OI (mm)</label><input type="text" name="prisma_v_oi_val"></div>
-            <div class="col-8">
-              <label class="small">Orientación vertical OI</label>
+            <div class="col-4"><label>Vertical OI (mm)</label><input class="line" name="prisma_v_oi_val"></div>
+            <div class="col-8"><label>Orientación vertical OI</label>
               <div class="chips">
                 <label class="chip"><input type="radio" name="vert_oi" value="Nasal">Nasal</label>
                 <label class="chip"><input type="radio" name="vert_oi" value="Temporal">Temporal</label>
               </div>
             </div>
-
-            <div class="col-12"><label class="small">Resultado OI</label><input type="text" name="prisma_res_oi"></div>
+            <div class="col-12"><label>Resultado OI</label><input class="line" name="prisma_res_oi"></div>
           </div>
         </div>
-
+        <!-- OD -->
         <div class="col-6">
           <div class="grid">
-            <div class="col-4"><label class="small">Horizontal OD (mm)</label><input type="text" name="prisma_h_od_val"></div>
-            <div class="col-8">
-              <label class="small">Orientación horizontal OD</label>
+            <div class="col-4"><label>Horizontal OD (mm)</label><input class="line" name="prisma_h_od_val"></div>
+            <div class="col-8"><label>Orientación horizontal OD</label>
               <div class="chips">
                 <label class="chip"><input type="radio" name="horiz_od" value="Nasal">Nasal</label>
                 <label class="chip"><input type="radio" name="horiz_od" value="Temporal">Temporal</label>
               </div>
             </div>
-
-            <div class="col-4"><label class="small">Vertical OD (mm)</label><input type="text" name="prisma_v_od_val"></div>
-            <div class="col-8">
-              <label class="small">Orientación vertical OD</label>
+            <div class="col-4"><label>Vertical OD (mm)</label><input class="line" name="prisma_v_od_val"></div>
+            <div class="col-8"><label>Orientación vertical OD</label>
               <div class="chips">
                 <label class="chip"><input type="radio" name="vert_od" value="Nasal">Nasal</label>
                 <label class="chip"><input type="radio" name="vert_od" value="Temporal">Temporal</label>
               </div>
             </div>
-
-            <div class="col-12"><label class="small">Resultado OD</label><input type="text" name="prisma_res_od"></div>
+            <div class="col-12"><label>Resultado OD</label><input class="line" name="prisma_res_od"></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Estilo de vida -->
-    <section>
-      <h2>ESTILO DE VIDA · ¿Dónde pasas el día?</h2>
+    <section class="section" style="padding-top:0">
+      <h3 class="section-title">ESTILO DE VIDA · ¿Dónde pasas el día?</h3>
       <div class="grid">
-        <div class="col-12">
-          <label class="small">Ambientes interiores</label>
-          <div class="chips" id="grp-int"></div>
+        <div class="col-12"><label>Ambientes interiores</label>
+          <div class="chips">
+            <!-- int 0..100 -->
+            <label class="chip"><input type="radio" name="int" value="0">0%</label>
+            <label class="chip"><input type="radio" name="int" value="10">10%</label>
+            <label class="chip"><input type="radio" name="int" value="20">20%</label>
+            <label class="chip"><input type="radio" name="int" value="30">30%</label>
+            <label class="chip"><input type="radio" name="int" value="40">40%</label>
+            <label class="chip"><input type="radio" name="int" value="50">50%</label>
+            <label class="chip"><input type="radio" name="int" value="60">60%</label>
+            <label class="chip"><input type="radio" name="int" value="70">70%</label>
+            <label class="chip"><input type="radio" name="int" value="80">80%</label>
+            <label class="chip"><input type="radio" name="int" value="90">90%</label>
+            <label class="chip"><input type="radio" name="int" value="100">100%</label>
+          </div>
         </div>
-        <div class="col-12">
-          <label class="small">Ambientes exteriores</label>
-          <div class="chips" id="grp-ext"></div>
+        <div class="col-12"><label>Ambientes exteriores</label>
+          <div class="chips">
+            <!-- ext 0..100 -->
+            <label class="chip"><input type="radio" name="ext" value="0">0%</label>
+            <label class="chip"><input type="radio" name="ext" value="10">10%</label>
+            <label class="chip"><input type="radio" name="ext" value="20">20%</label>
+            <label class="chip"><input type="radio" name="ext" value="30">30%</label>
+            <label class="chip"><input type="radio" name="ext" value="40">40%</label>
+            <label class="chip"><input type="radio" name="ext" value="50">50%</label>
+            <label class="chip"><input type="radio" name="ext" value="60">60%</label>
+            <label class="chip"><input type="radio" name="ext" value="70">70%</label>
+            <label class="chip"><input type="radio" name="ext" value="80">80%</label>
+            <label class="chip"><input type="radio" name="ext" value="90">90%</label>
+            <label class="chip"><input type="radio" name="ext" value="100">100%</label>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Clasificación de importancia 0..5 -->
-    <section>
-      <h2>CLASIFICACIÓN DE IMPORTANCIA (0 = poco, 5 = muy importante)</h2>
+    <!-- Banner -->
+    <div class="hero" style="height:150px">
+      <img src="idmyself_actividades.jpg" alt="Clasificación de actividades">
+    </div>
+
+    <!-- Clasificación e intereses -->
+    <section class="section" style="padding-top:6mm">
+      <h3 class="section-title">CLASIFICACIÓN DE IMPORTANCIA · 0 = poco · 5 = muy importante</h3>
+      <table class="imp">
+        <thead>
+          <tr><th style="width:40%;text-align:left">Actividad</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left">Viendo televisión</td>
+            <td><input type="radio" name="tv" value="0"></td>
+            <td><input type="radio" name="tv" value="1"></td>
+            <td><input type="radio" name="tv" value="2"></td>
+            <td><input type="radio" name="tv" value="3"></td>
+            <td><input type="radio" name="tv" value="4"></td>
+            <td><input type="radio" name="tv" value="5"></td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Hacer compras</td>
+            <td><input type="radio" name="compras" value="0"></td>
+            <td><input type="radio" name="compras" value="1"></td>
+            <td><input type="radio" name="compras" value="2"></td>
+            <td><input type="radio" name="compras" value="3"></td>
+            <td><input type="radio" name="compras" value="4"></td>
+            <td><input type="radio" name="compras" value="5"></td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Conducir</td>
+            <td><input type="radio" name="drive" value="0"></td>
+            <td><input type="radio" name="drive" value="1"></td>
+            <td><input type="radio" name="drive" value="2"></td>
+            <td><input type="radio" name="drive" value="3"></td>
+            <td><input type="radio" name="drive" value="4"></td>
+            <td><input type="radio" name="drive" value="5"></td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Vida profesional</td>
+            <td><input type="radio" name="vida" value="0"></td>
+            <td><input type="radio" name="vida" value="1"></td>
+            <td><input type="radio" name="vida" value="2"></td>
+            <td><input type="radio" name="vida" value="3"></td>
+            <td><input type="radio" name="vida" value="4"></td>
+            <td><input type="radio" name="vida" value="5"></td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Deportes y recreación</td>
+            <td><input type="radio" name="sport" value="0"></td>
+            <td><input type="radio" name="sport" value="1"></td>
+            <td><input type="radio" name="sport" value="2"></td>
+            <td><input type="radio" name="sport" value="3"></td>
+            <td><input type="radio" name="sport" value="4"></td>
+            <td><input type="radio" name="sport" value="5"></td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Computadoras y dispositivos digitales</td>
+            <td><input type="radio" name="comp" value="0"></td>
+            <td><input type="radio" name="comp" value="1"></td>
+            <td><input type="radio" name="comp" value="2"></td>
+            <td><input type="radio" name="comp" value="3"></td>
+            <td><input type="radio" name="comp" value="4"></td>
+            <td><input type="radio" name="comp" value="5"></td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Lectura</td>
+            <td><input type="radio" name="lect" value="0"></td>
+            <td><input type="radio" name="lect" value="1"></td>
+            <td><input type="radio" name="lect" value="2"></td>
+            <td><input type="radio" name="lect" value="3"></td>
+            <td><input type="radio" name="lect" value="4"></td>
+            <td><input type="radio" name="lect" value="5"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="height:8px"></div>
+      <!-- Detalles (checkbox = 1 si marcado) -->
       <div class="grid">
-        <div class="col-12" id="ratings"></div>
-      </div>
-      <div class="sep"></div>
-      <!-- Detalles por categoría -->
-      <div class="grid">
-        <div class="col-12">
-          <label class="small">Conducir – detalles</label>
-          <div class="chips" id="chips-drive"></div>
+        <div class="col-12"><label>Conducir – detalles</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="drive_auto" value="1">Auto</label>
+            <label class="chip"><input type="checkbox" name="drive_bus" value="1">Autobús</label>
+            <label class="chip"><input type="checkbox" name="drive_moto" value="1">Moto</label>
+            <label class="chip"><input type="checkbox" name="drive_tren" value="1">Tren</label>
+            <label class="chip"><input type="checkbox" name="drive_camion" value="1">Camión</label>
+          </div>
         </div>
-        <div class="col-12">
-          <label class="small">Vida profesional – detalles</label>
-          <div class="chips" id="chips-vida"></div>
+        <div class="col-12"><label>Vida profesional – detalles</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="work_cerca" value="1">Cerca</label>
+            <label class="chip"><input type="checkbox" name="work_inter_cercano" value="1">Intermedio y cercano</label>
+            <label class="chip"><input type="checkbox" name="work_inter_laboral" value="1">Intermedio laboral</label>
+            <label class="chip"><input type="checkbox" name="work_lejos" value="1">Lejos</label>
+            <label class="chip"><input type="checkbox" name="work_inter_lejano" value="1">Intermedio y lejano</label>
+          </div>
         </div>
-        <div class="col-12">
-          <label class="small">Deportes – detalles</label>
-          <div class="chips" id="chips-sport"></div>
+        <div class="col-12"><label>Deportes – detalles</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="sport_gimnasia" value="1">Gimnasia</label>
+            <label class="chip"><input type="checkbox" name="sport_correr" value="1">Correr y caminar</label>
+            <label class="chip"><input type="checkbox" name="sport_golf" value="1">Golf</label>
+            <label class="chip"><input type="checkbox" name="sport_tenis" value="1">Tenis</label>
+            <label class="chip"><input type="checkbox" name="sport_pelota" value="1">Juegos de pelota</label>
+            <label class="chip"><input type="checkbox" name="sport_ciclismo" value="1">Ciclismo</label>
+          </div>
         </div>
-        <div class="col-12">
-          <label class="small">Computadoras y dispositivos – detalles</label>
-          <div class="chips" id="chips-comp"></div>
+        <div class="col-12"><label>Computadoras y dispositivos – detalles</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="comp_pc" value="1">Computador</label>
+            <label class="chip"><input type="checkbox" name="comp_portatil" value="1">Portátil</label>
+            <label class="chip"><input type="checkbox" name="comp_varios" value="1">Varios dispositivos</label>
+            <label class="chip"><input type="checkbox" name="comp_tableta" value="1">Tableta</label>
+            <label class="chip"><input type="checkbox" name="comp_phone" value="1">Teléfonos inteligentes</label>
+          </div>
         </div>
-        <div class="col-12">
-          <label class="small">Lectura – detalles</label>
-          <div class="chips" id="chips-lect"></div>
+        <div class="col-12"><label>Lectura – detalles</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="lect_libro" value="1">Libro</label>
+            <label class="chip"><input type="checkbox" name="lect_digital" value="1">Dispositivos digitales</label>
+            <label class="chip"><input type="checkbox" name="lect_periodico" value="1">Periódico</label>
+            <label class="chip"><input type="checkbox" name="lect_revista" value="1">Revista</label>
+            <label class="chip"><input type="checkbox" name="lect_varios" value="1">Varios medios</label>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Medidas del marco -->
-    <section>
-      <h2>MEDIDAS DEL MARCO</h2>
+    <section class="section" style="padding-top:6mm">
+      <h3 class="section-title">MEDIDAS DEL MARCO</h3>
       <div class="grid">
-        <div class="col-2"><label class="small">DNP OI</label><input type="text" name="dnp_oi"></div>
-        <div class="col-2"><label class="small">DNP OD</label><input type="text" name="dnp_od"></div>
-        <div class="col-2"><label class="small">Altura pupilar OI</label><input type="text" name="altura_pupilar_oi"></div>
-        <div class="col-2"><label class="small">Altura pupilar OD</label><input type="text" name="altura_pupilar_od"></div>
-        <div class="col-2"><label class="small">Altura total del cristalino</label><input type="text" name="altura_total_cristalino"></div>
-        <div class="col-2"><label class="small">Distancia al vértice</label><input type="text" name="distancia_al_vertice"></div>
-        <div class="col-3"><label class="small">Inclinación pantoscópica</label><input type="text" name="inclinacion_pantoscopica"></div>
-        <div class="col-3"><label class="small">Curva del borde</label><input type="text" name="curva_del_borde"></div>
+        <div class="col-3"><label>DNP OI</label><input class="line" name="dnp_oi" placeholder="mm"></div>
+        <div class="col-3"><label>DNP OD</label><input class="line" name="dnp_od" placeholder="mm"></div>
+        <div class="col-3"><label>Altura pupilar OI</label><input class="line" name="altura_pupilar_oi" placeholder="mm"></div>
+        <div class="col-3"><label>Altura pupilar OD</label><input class="line" name="altura_pupilar_od" placeholder="mm"></div>
+        <div class="col-3"><label>Altura total del cristalino</label><input class="line" name="altura_total_cristalino" placeholder="mm"></div>
+        <div class="col-3"><label>Distancia al vértice</label><input class="line" name="distancia_al_vertice" placeholder="mm"></div>
+        <div class="col-3"><label>Inclinación pantoscópica</label><input class="line" name="inclinacion_pantoscopica" placeholder="grado"></div>
+        <div class="col-3"><label>Curva del borde</label><input class="line" name="curva_del_borde" placeholder="grado"></div>
       </div>
-    </section>
 
-    <!-- Gafas anteriores y Receta previa -->
-    <section>
-      <h2>GAFAS ANTERIORES</h2>
+      <h3 class="section-title" style="margin-top:12px">GAFAS ANTERIORES</h3>
       <div class="grid">
-        <div class="col-3"><label class="small">Tipo de lente</label><input type="text" name="tipo_lente"></div>
-        <div class="col-3">
-          <label class="small">Proveedor</label>
+        <div class="col-3"><label>Tipo de lente</label><input class="line" name="tipo_lente"></div>
+        <div class="col-3"><label>Proveedor</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="proveedor" value="HOYA">HOYA</label>
             <label class="chip"><input type="radio" name="proveedor" value="Otro">Otro</label>
           </div>
         </div>
-        <div class="col-3"><label class="small">Diseño</label><input type="text" name="diseno"></div>
-        <div class="col-3"><label class="small">Longitud del pasillo</label><input type="text" name="longitud_pasillo"></div>
+        <div class="col-3"><label>Diseño</label><input class="line" name="diseno"></div>
+        <div class="col-3"><label>Longitud del pasillo</label><input class="line" name="longitud_pasillo"></div>
       </div>
 
-      <div class="sep"></div>
-      <h2>RECETA PREVIA</h2>
+      <h3 class="section-title" style="margin-top:12px">RECETA PREVIA</h3>
       <div class="grid">
+        <!-- OI -->
         <div class="col-6">
           <div class="grid">
-            <div class="col-3"><label class="small">Cil OI</label><input type="text" name="rp_cil_oi"></div>
-            <div class="col-3"><label class="small">Esf OI</label><input type="text" name="rp_esf_oi"></div>
-            <div class="col-3"><label class="small">Eje OI</label><input type="text" name="rp_eje_oi"></div>
-            <div class="col-3"><label class="small">Adic OI</label><input type="text" name="rp_adic_oi"></div>
+            <div class="col-3"><label>Cil OI</label><input class="line" name="rp_cil_oi"></div>
+            <div class="col-3"><label>Esf OI</label><input class="line" name="rp_esf_oi"></div>
+            <div class="col-3"><label>Eje OI</label><input class="line" name="rp_eje_oi"></div>
+            <div class="col-3"><label>Adic OI</label><input class="line" name="rp_adic_oi"></div>
           </div>
         </div>
+        <!-- OD -->
         <div class="col-6">
           <div class="grid">
-            <div class="col-3"><label class="small">Cil OD</label><input type="text" name="rp_cil_od"></div>
-            <div class="col-3"><label class="small">Esf OD</label><input type="text" name="rp_esf_od"></div>
-            <div class="col-3"><label class="small">Eje OD</label><input type="text" name="rp_eje_od"></div>
-            <div class="col-3"><label class="small">Adic OD</label><input type="text" name="rp_adic_od"></div>
+            <div class="col-3"><label>Cil OD</label><input class="line" name="rp_cil_od"></div>
+            <div class="col-3"><label>Esf OD</label><input class="line" name="rp_esf_od"></div>
+            <div class="col-3"><label>Eje OD</label><input class="line" name="rp_eje_od"></div>
+            <div class="col-3"><label>Adic OD</label><input class="line" name="rp_adic_od"></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Satisfacción -->
-    <section>
-      <h2>NIVEL DE SATISFACCIÓN</h2>
+    <section class="section" style="padding-top:0">
+      <h3 class="section-title">NIVEL DE SATISFACCIÓN</h3>
       <div class="chips">
         <label class="chip"><input type="radio" name="satisfaccion" value="Muy satisfecho">Muy satisfecho</label>
         <label class="chip"><input type="radio" name="satisfaccion" value="Satisfecho">Satisfecho</label>
@@ -276,114 +415,19 @@
       </div>
     </section>
 
-    <div class="btnbar">
-      <button type="submit">Enviar</button>
-    </div>
-    <p class="help" style="padding:0 22px 22px">Al enviar, los datos se guardan en tu Google Sheet.</p>
-  </form>
+    <!-- Botón enviar -->
+    <section class="section" style="padding-top:0">
+      <button class="btn" type="submit">Enviar a Google Sheets</button>
+    </section>
+
+  </div>
+</form>
+
+<!-- Logos fijos -->
+<div class="page-footer">
+  <img src="Imagen_Hoya.jpg" alt="HOYA" class="logo-hoya" />
+  <img src="Imagen_tecnologia.jpg" alt="Tecnología Japonesa para la Visión" class="logo-tech" />
 </div>
 
-<script>
-/* ====== CONFIGURAR TU URL DE APPS SCRIPT ====== */
-const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycby1V6T1CuWqWJ-ooLsbm6zVx2sPoMr-oAcAx8DGx6VmrIR0Cj7i4UVq5YUxmZp85VXiTw/exec";
-
-/* === Generadores para evitar HTML gigante === */
-function buildPercentChips(containerId, name){
-  const cont = document.getElementById(containerId);
-  const steps = [0,10,20,30,40,50,60,70,80,90,100];
-  steps.forEach(v=>{
-    const lbl = document.createElement('label'); lbl.className='chip';
-    lbl.innerHTML = `<input type="radio" name="${name}" value="${v}%"> ${v}%`;
-    cont.appendChild(lbl);
-  });
-}
-function buildRatings(names){
-  const box = document.getElementById('ratings');
-  names.forEach(n=>{
-    const row = document.createElement('div');
-    row.className='row'; row.style.margin='8px 0';
-    const title = document.createElement('div');
-    title.textContent = n.toUpperCase()+':'; title.style.minWidth='120px'; title.style.fontWeight='600';
-    row.appendChild(title);
-    for(let i=0;i<=5;i++){
-      const lbl = document.createElement('label'); lbl.className='chip';
-      lbl.innerHTML = `<input type="radio" name="${n}" value="${i}"> ${i}`;
-      row.appendChild(lbl);
-    }
-    box.appendChild(row);
-  });
-}
-function buildCheckboxChips(containerId, defs){
-  const cont = document.getElementById(containerId);
-  defs.forEach(d=>{
-    const lbl = document.createElement('label'); lbl.className='chip';
-    lbl.innerHTML = `<input type="checkbox" name="${d.name}" value="1"> ${d.text}`;
-    cont.appendChild(lbl);
-  });
-}
-
-/* Render dinámico */
-buildPercentChips('grp-int','int');
-buildPercentChips('grp-ext','ext');
-buildRatings(['tv','compras','drive','vida','sport','comp','lect']);
-buildCheckboxChips('chips-drive',[
-  {name:'drive_auto',text:'Auto'},{name:'drive_bus',text:'Autobús'},
-  {name:'drive_moto',text:'Moto'},{name:'drive_tren',text:'Tren'},
-  {name:'drive_camion',text:'Camión'}
-]);
-buildCheckboxChips('chips-vida',[
-  {name:'work_cerca',text:'Cerca'},
-  {name:'work_inter_cercano',text:'Intermedio y cercano'},
-  {name:'work_inter_laboral',text:'Intermedio laboral'},
-  {name:'work_lejos',text:'Lejos'},
-  {name:'work_inter_lejano',text:'Intermedio y lejano'}
-]);
-buildCheckboxChips('chips-sport',[
-  {name:'sport_gimnasia',text:'Gimnasia'},{name:'sport_correr',text:'Correr y caminar'},
-  {name:'sport_golf',text:'Golf'},{name:'sport_tenis',text:'Tenis'},
-  {name:'sport_pelota',text:'Juegos de pelota'},{name:'sport_ciclismo',text:'Ciclismo'}
-]);
-buildCheckboxChips('chips-comp',[
-  {name:'comp_pc',text:'Computador'},{name:'comp_portatil',text:'Portátil'},
-  {name:'comp_varios',text:'Varios dispositivos'},{name:'comp_tableta',text:'Tableta'},
-  {name:'comp_phone',text:'Teléfonos inteligentes'}
-]);
-buildCheckboxChips('chips-lect',[
-  {name:'lect_libro',text:'Libro'},{name:'lect_digital',text:'Dispositivos digitales'},
-  {name:'lect_periodico',text:'Periódico'},{name:'lect_revista',text:'Revista'},
-  {name:'lect_varios',text:'Varios medios'}
-]);
-
-/* ====== Envío al Sheet ====== */
-function collectData(){
-  const data = {};
-  document.querySelectorAll('input[name], select[name], textarea[name]').forEach(el=>{
-    const n = el.name;
-    if(!n) return;
-    if(el.type==='radio'){ if(el.checked) data[n]=el.value; }
-    else if(el.type==='checkbox'){ data[n]= el.checked ? '1' : ''; }
-    else{ data[n]= el.value ?? ''; }
-  });
-  return data;
-}
-async function sendForm(e){
-  e.preventDefault();
-  const payload = collectData();
-  try{
-    await fetch(APPS_SCRIPT_URL,{
-      method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
-    alert('¡Enviado! Revisa tu Google Sheet.');
-    // document.getElementById('formHoya').reset(); // si deseas limpiar
-  }catch(err){
-    console.error(err);
-    alert('Hubo un error enviando el formulario.');
-  }
-}
-document.getElementById('formHoya').addEventListener('submit', sendForm);
-</script>
 </body>
 </html>
