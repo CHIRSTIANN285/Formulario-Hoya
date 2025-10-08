@@ -6,13 +6,8 @@
 <title>Formulario Identifier – iD Myself – HOYALUX</title>
 <style>
   :root{
-    --navy:#0a2d6f;
-    --blue:#0b3d91;
-    --grid:#e6e9ff;
-    --accent:#7a2b6c;
-    --accent-bg:#f6e8f3;
-    --ink:#0f172a;
-    --muted:#475569;
+    --navy:#0a2d6f; --blue:#0b3d91; --grid:#e6e9ff;
+    --accent:#7a2b6c; --accent-bg:#f6e8f3; --ink:#0f172a; --muted:#475569;
   }
   html,body{height:100%}
   body{margin:0;background:#eef2ff;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;color:var(--ink)}
@@ -25,12 +20,8 @@
   .section-title{color:var(--accent);font-weight:800;font-size:14px;letter-spacing:.4px;display:flex;align-items:center;gap:10px;margin:0 0 10px}
   .section-title::before{content:"";width:12px;height:12px;background:var(--blue);border-radius:3px}
   .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px 14px;align-items:end}
-  .col-12{grid-column:span 12}
-  .col-8{ grid-column:span 8 }
-  .col-6{ grid-column:span 6 }
-  .col-4{ grid-column:span 4 }
-  .col-3{ grid-column:span 3 }
-  .col-2{ grid-column:span 2 }
+  .col-12{grid-column:span 12} .col-8{grid-column:span 8} .col-6{grid-column:span 6}
+  .col-4{grid-column:span 4} .col-3{grid-column:span 3} .col-2{grid-column:span 2}
   label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
   input[type="text"], input[type="date"], input[type="number"]{
     width:100%;border:1px solid #e5e7eb;background:#fbfaff;border-radius:6px;padding:8px 10px;font:inherit;color:var(--ink)
@@ -38,13 +29,11 @@
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px;background:#fff;cursor:pointer}
   .chip input{accent-color:var(--accent)}
-  .line{border-bottom:1px solid var(--grid)}
   .subcap{font-weight:700;color:#6b21a8;margin:6px 0}
   .pr-row{display:grid;grid-template-columns:90px 1fr auto;gap:8px;align-items:center}
   .pill{display:inline-block;padding:6px 10px;border:1px solid #e5e7eb;border-radius:999px;background:#fff}
   .actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;padding:12px 22px;border-top:1px dashed #e5e7eb}
   .btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 14px;cursor:pointer}
-  .btn.ghost{background:transparent;color:var(--navy);border:2px solid var(--navy)}
   .msg{font-size:13px;margin-left:auto}
   .banner{height:180px;background:var(--navy);overflow:hidden}
   .banner img{width:100%;height:100%;object-fit:cover;opacity:.92}
@@ -65,14 +54,11 @@
   </div>
 
   <form id="formHoya">
-    <!-- Información personal -->
+    <!-- INFORMACIÓN PERSONAL -->
     <section class="section">
       <h3 class="section-title">INFORMACIÓN PERSONAL</h3>
       <div class="grid">
-        <div class="col-6">
-          <label for="sistema">Sistema operativo del cliente</label>
-          <input id="sistema" name="sistema" placeholder="Android / iOS / Otro" />
-        </div>
+        <div class="col-6"><label for="sistema">Sistema operativo del cliente</label><input id="sistema" name="sistema" placeholder="Android / iOS / Otro" /></div>
         <div class="col-6"></div>
         <div class="col-6"><label for="nombre">Nombre</label><input id="nombre" name="nombre" /></div>
         <div class="col-6"><label for="apellidos">Apellidos</label><input id="apellidos" name="apellidos" /></div>
@@ -87,7 +73,7 @@
       </div>
     </section>
 
-    <!-- Prescripción -->
+    <!-- PRESCRIPCIÓN -->
     <section class="section" style="padding-top:0">
       <h3 class="section-title">PRESCRIPCIÓN</h3>
       <div class="grid">
@@ -120,7 +106,7 @@
       </div>
     </section>
 
-    <!-- Información del prisma -->
+    <!-- INFORMACIÓN DEL PRISMA -->
     <section class="section" style="padding-top:0">
       <h3 class="section-title">INFORMACIÓN DEL PRISMA</h3>
       <div class="grid">
@@ -176,13 +162,12 @@
       </div>
     </section>
 
-    <!-- Estilo de vida -->
+    <!-- ESTILO DE VIDA -->
     <section class="section" style="padding-top:0">
       <h3 class="section-title">ESTILO DE VIDA · ¿Dónde pasas el día?</h3>
       <div class="grid">
         <div class="col-12"><label>Ambientes interiores</label></div>
         <div class="col-12 chips">
-          <!-- int (0..100) -->
           <label class="chip"><input type="radio" name="int" value="0%">0%</label>
           <label class="chip"><input type="radio" name="int" value="10%">10%</label>
           <label class="chip"><input type="radio" name="int" value="20%">20%</label>
@@ -198,7 +183,6 @@
 
         <div class="col-12"><label>Ambientes exteriores</label></div>
         <div class="col-12 chips">
-          <!-- ext (0..100) -->
           <label class="chip"><input type="radio" name="ext" value="0%">0%</label>
           <label class="chip"><input type="radio" name="ext" value="10%">10%</label>
           <label class="chip"><input type="radio" name="ext" value="20%">20%</label>
@@ -212,70 +196,32 @@
           <label class="chip"><input type="radio" name="ext" value="100%">100%</label>
         </div>
 
-        <!-- Importancias 0..5 (tv, compras, drive, vida, sport, comp, lect) -->
         <div class="col-12"><label>Importancia (0..5)</label></div>
         <div class="col-12 chips">
           <span class="pill">TV:</span>
-          <label class="chip"><input type="radio" name="tv" value="0">0</label>
-          <label class="chip"><input type="radio" name="tv" value="1">1</label>
-          <label class="chip"><input type="radio" name="tv" value="2">2</label>
-          <label class="chip"><input type="radio" name="tv" value="3">3</label>
-          <label class="chip"><input type="radio" name="tv" value="4">4</label>
-          <label class="chip"><input type="radio" name="tv" value="5">5</label>
+          <label class="chip"><input type="radio" name="tv" value="0">0</label><label class="chip"><input type="radio" name="tv" value="1">1</label><label class="chip"><input type="radio" name="tv" value="2">2</label><label class="chip"><input type="radio" name="tv" value="3">3</label><label class="chip"><input type="radio" name="tv" value="4">4</label><label class="chip"><input type="radio" name="tv" value="5">5</label>
 
           <span class="pill">Compras:</span>
-          <label class="chip"><input type="radio" name="compras" value="0">0</label>
-          <label class="chip"><input type="radio" name="compras" value="1">1</label>
-          <label class="chip"><input type="radio" name="compras" value="2">2</label>
-          <label class="chip"><input type="radio" name="compras" value="3">3</label>
-          <label class="chip"><input type="radio" name="compras" value="4">4</label>
-          <label class="chip"><input type="radio" name="compras" value="5">5</label>
+          <label class="chip"><input type="radio" name="compras" value="0">0</label><label class="chip"><input type="radio" name="compras" value="1">1</label><label class="chip"><input type="radio" name="compras" value="2">2</label><label class="chip"><input type="radio" name="compras" value="3">3</label><label class="chip"><input type="radio" name="compras" value="4">4</label><label class="chip"><input type="radio" name="compras" value="5">5</label>
 
           <span class="pill">Conducir:</span>
-          <label class="chip"><input type="radio" name="drive" value="0">0</label>
-          <label class="chip"><input type="radio" name="drive" value="1">1</label>
-          <label class="chip"><input type="radio" name="drive" value="2">2</label>
-          <label class="chip"><input type="radio" name="drive" value="3">3</label>
-          <label class="chip"><input type="radio" name="drive" value="4">4</label>
-          <label class="chip"><input type="radio" name="drive" value="5">5</label>
+          <label class="chip"><input type="radio" name="drive" value="0">0</label><label class="chip"><input type="radio" name="drive" value="1">1</label><label class="chip"><input type="radio" name="drive" value="2">2</label><label class="chip"><input type="radio" name="drive" value="3">3</label><label class="chip"><input type="radio" name="drive" value="4">4</label><label class="chip"><input type="radio" name="drive" value="5">5</label>
 
           <span class="pill">Vida profesional:</span>
-          <label class="chip"><input type="radio" name="vida" value="0">0</label>
-          <label class="chip"><input type="radio" name="vida" value="1">1</label>
-          <label class="chip"><input type="radio" name="vida" value="2">2</label>
-          <label class="chip"><input type="radio" name="vida" value="3">3</label>
-          <label class="chip"><input type="radio" name="vida" value="4">4</label>
-          <label class="chip"><input type="radio" name="vida" value="5">5</label>
+          <label class="chip"><input type="radio" name="vida" value="0">0</label><label class="chip"><input type="radio" name="vida" value="1">1</label><label class="chip"><input type="radio" name="vida" value="2">2</label><label class="chip"><input type="radio" name="vida" value="3">3</label><label class="chip"><input type="radio" name="vida" value="4">4</label><label class="chip"><input type="radio" name="vida" value="5">5</label>
 
           <span class="pill">Deportes:</span>
-          <label class="chip"><input type="radio" name="sport" value="0">0</label>
-          <label class="chip"><input type="radio" name="sport" value="1">1</label>
-          <label class="chip"><input type="radio" name="sport" value="2">2</label>
-          <label class="chip"><input type="radio" name="sport" value="3">3</label>
-          <label class="chip"><input type="radio" name="sport" value="4">4</label>
-          <label class="chip"><input type="radio" name="sport" value="5">5</label>
+          <label class="chip"><input type="radio" name="sport" value="0">0</label><label class="chip"><input type="radio" name="sport" value="1">1</label><label class="chip"><input type="radio" name="sport" value="2">2</label><label class="chip"><input type="radio" name="sport" value="3">3</label><label class="chip"><input type="radio" name="sport" value="4">4</label><label class="chip"><input type="radio" name="sport" value="5">5</label>
 
           <span class="pill">Computadora:</span>
-          <label class="chip"><input type="radio" name="comp" value="0">0</label>
-          <label class="chip"><input type="radio" name="comp" value="1">1</label>
-          <label class="chip"><input type="radio" name="comp" value="2">2</label>
-          <label class="chip"><input type="radio" name="comp" value="3">3</label>
-          <label class="chip"><input type="radio" name="comp" value="4">4</label>
-          <label class="chip"><input type="radio" name="comp" value="5">5</label>
+          <label class="chip"><input type="radio" name="comp" value="0">0</label><label class="chip"><input type="radio" name="comp" value="1">1</label><label class="chip"><input type="radio" name="comp" value="2">2</label><label class="chip"><input type="radio" name="comp" value="3">3</label><label class="chip"><input type="radio" name="comp" value="4">4</label><label class="chip"><input type="radio" name="comp" value="5">5</label>
 
           <span class="pill">Lectura:</span>
-          <label class="chip"><input type="radio" name="lect" value="0">0</label>
-          <label class="chip"><input type="radio" name="lect" value="1">1</label>
-          <label class="chip"><input type="radio" name="lect" value="2">2</label>
-          <label class="chip"><input type="radio" name="lect" value="3">3</label>
-          <label class="chip"><input type="radio" name="lect" value="4">4</label>
-          <label class="chip"><input type="radio" name="lect" value="5">5</label>
+          <label class="chip"><input type="radio" name="lect" value="0">0</label><label class="chip"><input type="radio" name="lect" value="1">1</label><label class="chip"><input type="radio" name="lect" value="2">2</label><label class="chip"><input type="radio" name="lect" value="3">3</label><label class="chip"><input type="radio" name="lect" value="4">4</label><label class="chip"><input type="radio" name="lect" value="5">5</label>
         </div>
 
-        <!-- Detalles (checkbox) -->
         <div class="col-12"><label>Detalles de actividades</label></div>
         <div class="col-12 chips">
-          <!-- Conducir -->
           <span class="pill">Conducir:</span>
           <label class="chip"><input type="checkbox" name="drive_auto" value="Sí"> Auto</label>
           <label class="chip"><input type="checkbox" name="drive_bus" value="Sí"> Autobús</label>
@@ -283,7 +229,6 @@
           <label class="chip"><input type="checkbox" name="drive_tren" value="Sí"> Tren</label>
           <label class="chip"><input type="checkbox" name="drive_camion" value="Sí"> Camión</label>
 
-          <!-- Vida profesional -->
           <span class="pill">Vida profesional:</span>
           <label class="chip"><input type="checkbox" name="work_cerca" value="Sí"> Cerca</label>
           <label class="chip"><input type="checkbox" name="work_inter_cercano" value="Sí"> Intermedio y cercano</label>
@@ -291,7 +236,6 @@
           <label class="chip"><input type="checkbox" name="work_lejos" value="Sí"> Lejos</label>
           <label class="chip"><input type="checkbox" name="work_inter_lejano" value="Sí"> Intermedio y lejano</label>
 
-          <!-- Deportes -->
           <span class="pill">Deportes:</span>
           <label class="chip"><input type="checkbox" name="sport_gimnasia" value="Sí"> Gimnasia</label>
           <label class="chip"><input type="checkbox" name="sport_correr" value="Sí"> Correr y caminar</label>
@@ -300,7 +244,6 @@
           <label class="chip"><input type="checkbox" name="sport_pelota" value="Sí"> Juegos de pelota</label>
           <label class="chip"><input type="checkbox" name="sport_ciclismo" value="Sí"> Ciclismo</label>
 
-          <!-- Computadoras -->
           <span class="pill">Computadoras:</span>
           <label class="chip"><input type="checkbox" name="comp_pc" value="Sí"> Computador</label>
           <label class="chip"><input type="checkbox" name="comp_portatil" value="Sí"> Portátil</label>
@@ -308,7 +251,6 @@
           <label class="chip"><input type="checkbox" name="comp_tableta" value="Sí"> Tableta</label>
           <label class="chip"><input type="checkbox" name="comp_phone" value="Sí"> Teléfonos inteligentes</label>
 
-          <!-- Lectura -->
           <span class="pill">Lectura:</span>
           <label class="chip"><input type="checkbox" name="lect_libro" value="Sí"> Libro</label>
           <label class="chip"><input type="checkbox" name="lect_digital" value="Sí"> Dispositivos digitales</label>
@@ -319,7 +261,7 @@
       </div>
     </section>
 
-    <!-- Medidas del marco -->
+    <!-- MEDIDAS DEL MARCO -->
     <section class="section" style="padding-top:0">
       <h3 class="section-title">MEDIDAS DEL MARCO</h3>
       <div class="grid">
@@ -363,7 +305,7 @@
       </div>
     </section>
 
-    <!-- Satisfacción -->
+    <!-- SATISFACCIÓN -->
     <section class="section" style="padding-top:0">
       <h3 class="section-title">NIVEL DE SATISFACCIÓN</h3>
       <div class="chips">
@@ -375,18 +317,15 @@
       </div>
     </section>
 
-    <!-- Acciones -->
+    <!-- ACCIÓN ÚNICA -->
     <div class="actions">
-      <button class="btn" type="submit" id="btnSubmit">Enviar a Google Sheets</button>
-      <button class="btn ghost" type="button" id="btnPrint">Imprimir / Guardar PDF</button>
+      <button class="btn" type="submit" id="btnSendPrint">Enviar y Descargar PDF</button>
       <div id="msg" class="msg"></div>
     </div>
   </form>
 
   <!-- Banner + pie -->
-  <div class="banner">
-    <img src="idmyself_actividades.jpg" alt="Actividades" />
-  </div>
+  <div class="banner"><img src="idmyself_actividades.jpg" alt="Actividades" /></div>
   <div class="page-footer">
     <img src="Imagen_Hoya.jpg" alt="HOYA" />
     <img src="Imagen_tecnologia.jpg" alt="Tecnología Japonesa para la Visión" />
@@ -394,135 +333,84 @@
 </div>
 
 <script>
-  // URL de tu Web App (implementada, acceso "Cualquiera")
+  // Tu Web App (ya implementada con acceso "Cualquiera")
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8wYVJCHIBZPW2mzkpBkSUdGUzddeNmXcgpZmeTOfHHgiL1WcA1CMHIM8G4CaG5iMGEQ/exec";
 
-  const f = document.getElementById('formHoya');
+  const f   = document.getElementById('formHoya');
   const msg = document.getElementById('msg');
-  const btn = document.getElementById('btnSubmit');
+  const btn = document.getElementById('btnSendPrint');
 
   const val = name => (document.querySelector(`[name="${name}"]`) || {}).value || '';
   const valR = name => (document.querySelector(`[name="${name}"]:checked`) || {}).value || '';
   const valC = name => (document.querySelector(`[name="${name}"]`)?.checked ? (document.querySelector(`[name="${name}"]`).value || 'Sí') : '');
-
-  document.getElementById('btnPrint').addEventListener('click', () => window.print());
 
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     msg.textContent = "Enviando…";
     btn.disabled = true;
 
-    // Construir payload con TODOS los encabezados de tu sheet
     const payload = {
       timestamp: new Date().toISOString(),
+      sistema: val('sistema'), nombre: val('nombre'), apellidos: val('apellidos'),
+      sexo: valR('sexo'), fecha_nac: val('fecha_nac'),
 
-      sistema: val('sistema'),
-      nombre: val('nombre'),
-      apellidos: val('apellidos'),
-      sexo: valR('sexo'),
-      fecha_nac: val('fecha_nac'),
+      esf_oi: val('esf_oi'), cil_oi: val('cil_oi'), eje_oi: val('eje_oi'), adic_oi: val('adic_oi'),
+      esf_od: val('esf_od'), cil_od: val('cil_od'), eje_od: val('eje_od'), adic_od: val('adic_od'),
 
-      esf_oi: val('esf_oi'),
-      cil_oi: val('cil_oi'),
-      eje_oi: val('eje_oi'),
-      adic_oi: val('adic_oi'),
-      esf_od: val('esf_od'),
-      cil_od: val('cil_od'),
-      eje_od: val('eje_od'),
-      adic_od: val('adic_od'),
+      prisma_oi: valR('prisma_oi'), primer_par: valR('primer_par'),
 
-      prisma_oi: valR('prisma_oi'),
-      primer_par: valR('primer_par'),
+      prisma_h_oi_val: val('prisma_h_oi_val'), horiz_oi: valR('horiz_oi'),
+      prisma_v_oi_val: val('prisma_v_oi_val'), vert_oi: valR('vert_oi'), prisma_res_oi: val('prisma_res_oi'),
 
-      prisma_h_oi_val: val('prisma_h_oi_val'),
-      horiz_oi: valR('horiz_oi'),
-      prisma_v_oi_val: val('prisma_v_oi_val'),
-      vert_oi: valR('vert_oi'),
-      prisma_res_oi: val('prisma_res_oi'),
+      prisma_h_od_val: val('prisma_h_od_val'), horiz_od: valR('horiz_od'),
+      prisma_v_od_val: val('prisma_v_od_val'), vert_od: valR('vert_od'), prisma_res_od: val('prisma_res_od'),
 
-      prisma_h_od_val: val('prisma_h_od_val'),
-      horiz_od: valR('horiz_od'),
-      prisma_v_od_val: val('prisma_v_od_val'),
-      vert_od: valR('vert_od'),
-      prisma_res_od: val('prisma_res_od'),
+      int: valR('int'), ext: valR('ext'),
+      tv: valR('tv'), compras: valR('compras'), drive: valR('drive'),
+      vida: valR('vida'), sport: valR('sport'), comp: valR('comp'), lect: valR('lect'),
 
-      int: valR('int'),
-      ext: valR('ext'),
+      drive_auto: valC('drive_auto'), drive_bus: valC('drive_bus'), drive_moto: valC('drive_moto'),
+      drive_tren: valC('drive_tren'), drive_camion: valC('drive_camion'),
 
-      tv: valR('tv'),
-      compras: valR('compras'),
-      drive: valR('drive'),
-      vida: valR('vida'),
-      sport: valR('sport'),
-      comp: valR('comp'),
-      lect: valR('lect'),
-
-      drive_auto: valC('drive_auto'),
-      drive_bus: valC('drive_bus'),
-      drive_moto: valC('drive_moto'),
-      drive_tren: valC('drive_tren'),
-      drive_camion: valC('drive_camion'),
-
-      work_cerca: valC('work_cerca'),
-      work_inter_cercano: valC('work_inter_cercano'),
-      work_inter_laboral: valC('work_inter_laboral'),
-      work_lejos: valC('work_lejos'),
+      work_cerca: valC('work_cerca'), work_inter_cercano: valC('work_inter_cercano'),
+      work_inter_laboral: valC('work_inter_laboral'), work_lejos: valC('work_lejos'),
       work_inter_lejano: valC('work_inter_lejano'),
 
-      sport_gimnasia: valC('sport_gimnasia'),
-      sport_correr: valC('sport_correr'),
-      sport_golf: valC('sport_golf'),
-      sport_tenis: valC('sport_tenis'),
-      sport_pelota: valC('sport_pelota'),
-      sport_ciclismo: valC('sport_ciclismo'),
+      sport_gimnasia: valC('sport_gimnasia'), sport_correr: valC('sport_correr'),
+      sport_golf: valC('sport_golf'), sport_tenis: valC('sport_tenis'),
+      sport_pelota: valC('sport_pelota'), sport_ciclismo: valC('sport_ciclismo'),
 
-      comp_pc: valC('comp_pc'),
-      comp_portatil: valC('comp_portatil'),
-      comp_varios: valC('comp_varios'),
-      comp_tableta: valC('comp_tableta'),
-      comp_phone: valC('comp_phone'),
+      comp_pc: valC('comp_pc'), comp_portatil: valC('comp_portatil'), comp_varios: valC('comp_varios'),
+      comp_tableta: valC('comp_tableta'), comp_phone: valC('comp_phone'),
 
-      lect_libro: valC('lect_libro'),
-      lect_digital: valC('lect_digital'),
-      lect_periodico: valC('lect_periodico'),
-      lect_revista: valC('lect_revista'),
-      lect_varios: valC('lect_varios'),
+      lect_libro: valC('lect_libro'), lect_digital: valC('lect_digital'), lect_periodico: valC('lect_periodico'),
+      lect_revista: valC('lect_revista'), lect_varios: valC('lect_varios'),
 
-      dnp_oi: val('dnp_oi'),
-      dnp_od: val('dnp_od'),
-      altura_pupilar_oi: val('altura_pupilar_oi'),
-      altura_pupilar_od: val('altura_pupilar_od'),
-      altura_total_cristalino: val('altura_total_cristalino'),
-      distancia_al_vertice: val('distancia_al_vertice'),
-      inclinacion_pantoscopica: val('inclinacion_pantoscopica'),
-      curva_del_borde: val('curva_del_borde'),
+      dnp_oi: val('dnp_oi'), dnp_od: val('dnp_od'),
+      altura_pupilar_oi: val('altura_pupilar_oi'), altura_pupilar_od: val('altura_pupilar_od'),
+      altura_total_cristalino: val('altura_total_cristalino'), distancia_al_vertice: val('distancia_al_vertice'),
+      inclinacion_pantoscopica: val('inclinacion_pantoscopica'), curva_del_borde: val('curva_del_borde'),
 
-      tipo_lente: val('tipo_lente'),
-      proveedor: valR('proveedor') || val('proveedor'),
-      diseno: val('diseno'),
-      longitud_pasillo: val('longitud_pasillo'),
+      tipo_lente: val('tipo_lente'), proveedor: valR('proveedor') || val('proveedor'),
+      diseno: val('diseno'), longitud_pasillo: val('longitud_pasillo'),
 
-      rp_cil_oi: val('rp_cil_oi'),
-      rp_esf_oi: val('rp_esf_oi'),
-      rp_eje_oi: val('rp_eje_oi'),
-      rp_adic_oi: val('rp_adic_oi'),
-      rp_cil_od: val('rp_cil_od'),
-      rp_esf_od: val('rp_esf_od'),
-      rp_eje_od: val('rp_eje_od'),
-      rp_adic_od: val('rp_adic_od'),
+      rp_cil_oi: val('rp_cil_oi'), rp_esf_oi: val('rp_esf_oi'), rp_eje_oi: val('rp_eje_oi'), rp_adic_oi: val('rp_adic_oi'),
+      rp_cil_od: val('rp_cil_od'), rp_esf_od: val('rp_esf_od'), rp_eje_od: val('rp_eje_od'), rp_adic_od: val('rp_adic_od'),
 
       satisfaccion: valR('satisfaccion')
     };
 
     try{
       const body = new URLSearchParams(payload);
-      const r = await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body });
-      // Con mode:no-cors no hay respuesta legible, asumimos éxito
-      msg.textContent = "✅ Enviado. Revisa tu Google Sheet.";
-      f.reset();
+      await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', body });
+      msg.textContent = "✅ Enviado. Se abrirá el diálogo para guardar PDF…";
+      // Pequeña pausa para dar tiempo al POST
+      setTimeout(() => window.print(), 500);
+      // Si quieres limpiar después de imprimir, puedes resetear con otra pausa:
+      setTimeout(() => f.reset(), 1500);
     }catch(err){
       console.error(err);
-      msg.textContent = "❌ Error al enviar. Verifica la Web App (permisos e implementación).";
+      msg.textContent = "❌ Error al enviar. Verifica permisos/implementación de la Web App.";
     }finally{
       btn.disabled = false;
     }
