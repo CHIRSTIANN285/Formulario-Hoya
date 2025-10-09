@@ -715,8 +715,13 @@ async function sendOrder(e){
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit:'mm', format:'a4', orientation:'portrait' }
     };
-    const pdfBlob = await html2pdf().from(el).set(opt).outputPdf('blob');
-    fd.append('pdf', pdfBlob, `${fd.get('order_id')}.pdf`);
+// Genera PDF como DataURI Base64 (más robusto para Apps Script)
+const dataUri = await html2pdf().from(el).set(opt).outputPdf('datauristring');
+// dataUri = "data:application/pdf;base64,JVBERi0xLjcKJc..."
+const b64 = dataUri.split(',')[1]; // quita el prefijo
+fd.append('pdf_b64', b64);         // enviamos el base64
+fd.append('pdf_name', `${fd.get('order_id')}.pdf`); // nombre sugerido
+
 
     // Enviar al Web App (Apps Script: enviará correo y guardará en Sheet por encabezados)
     await fetch(WEB_APP_URL, { method:'POST', body: fd, mode:'no-cors' });
