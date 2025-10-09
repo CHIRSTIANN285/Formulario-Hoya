@@ -55,9 +55,9 @@ body{
 /* ===== Hero ===== */
 .hero{
   position:relative;
-  width: 210mm;                    /* ancho del hero */
-  height: 73mm;                    /* alto del hero */
-  margin: 0 auto;                  /* centra la imagen en la hoja */
+  width:210mm;                 /* igual que antes */
+  height:73mm;                 /* el alto reducido que aceptaste */
+  margin:0 auto;
   background:#ddd url('idmyself_header.jpg') center/cover no-repeat;
 }
 .hero .band{
@@ -129,7 +129,7 @@ label{font-size:12px; color:var(--muted); display:block}
 .chips label:has(input:checked){
   background:var(--rose); border-color:#e7cfe0; color:var(--accent);
 }
-/* separador “ó” entre los dos chips de cada grupo */
+/* separador “ó” exclusivamente entre los dos chips */
 .chips .chip + .chip::before{
   content:"ó";
   margin:0 6px;
@@ -183,7 +183,6 @@ label{font-size:12px; color:var(--muted); display:block}
     <div class="section personal">
       <h3>INFORMACIÓN PERSONAL</h3>
       <div class="grid" style="grid-template-columns: repeat(12, 1fr);">
-        <!-- Nombre del cliente (mantiene name="sistema" para tu hoja) -->
         <div class="col-6">
           <label>Nombre del cliente</label>
           <input class="line" name="sistema" placeholder="Nombre del cliente" />
@@ -228,7 +227,7 @@ label{font-size:12px; color:var(--muted); display:block}
           <label>Adición</label><input class="input" name="adic_oi">
           <label>Prisma</label>
           <div class="chips">
-            <label class="chip"><input type="radio" name="prisma_oi" value="Si"> Sí</label>
+            <label class="chip><input type="radio" name="prisma_oi" value="Si"> Sí</label>
             <label class="chip"><input type="radio" name="prisma_oi" value="No"> No</label>
           </div>
         </div>
@@ -251,7 +250,7 @@ label{font-size:12px; color:var(--muted); display:block}
       </div>
     </div>
 
-    <!-- Información del prisma -->
+    <!-- Información del prisma (único cambio: Nasal/Temporal como botones con separador “ó”) -->
     <div class="section">
       <h3>INFORMACIÓN DEL PRISMA</h3>
       <div class="two soft">
@@ -259,7 +258,6 @@ label{font-size:12px; color:var(--muted); display:block}
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
 
-          <!-- Horizontal OI: valor + chips en una sola columna (Nasal / Temporal) -->
           <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
             <div>
               <label>Horizontal (valor)</label>
@@ -271,7 +269,6 @@ label{font-size:12px; color:var(--muted); display:block}
             </div>
           </div>
 
-          <!-- Vertical OI -->
           <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:6px">
             <div>
               <label>Vertical (valor)</label>
@@ -290,7 +287,6 @@ label{font-size:12px; color:var(--muted); display:block}
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
 
-          <!-- Horizontal OD -->
           <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
             <div>
               <label>Horizontal (valor)</label>
@@ -302,7 +298,6 @@ label{font-size:12px; color:var(--muted); display:block}
             </div>
           </div>
 
-          <!-- Vertical OD -->
           <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:6px">
             <div>
               <label>Vertical (valor)</label>
@@ -367,11 +362,217 @@ label{font-size:12px; color:var(--muted); display:block}
 
   </section>
 
+  <!-- ============ PÁGINA 2 ============ -->
+  <section class="page page-break">
+
+    <!-- Clasificación de actividades -->
+    <div class="section">
+      <h3>CLASIFICACIÓN DE IMPORTANCIA DE CADA ACTIVIDAD · 0 = poco importante, 5 = muy importante</h3>
+      <table class="table">
+        <thead>
+          <tr><th style="width:42%">Actividad</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>Detalles</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Viendo televisión</td>
+            <td><input type="radio" name="tv" value="0"></td>
+            <td><input type="radio" name="tv" value="1"></td>
+            <td><input type="radio" name="tv" value="2"></td>
+            <td><input type="radio" name="tv" value="3"></td>
+            <td><input type="radio" name="tv" value="4"></td>
+            <td><input type="radio" name="tv" value="5"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Hacer compras</td>
+            <td><input type="radio" name="compras" value="0"></td>
+            <td><input type="radio" name="compras" value="1"></td>
+            <td><input type="radio" name="compras" value="2"></td>
+            <td><input type="radio" name="compras" value="3"></td>
+            <td><input type="radio" name="compras" value="4"></td>
+            <td><input type="radio" name="compras" value="5"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Conducir</td>
+            <td><input type="radio" name="drive" value="0"></td>
+            <td><input type="radio" name="drive" value="1"></td>
+            <td><input type="radio" name="drive" value="2"></td>
+            <td><input type="radio" name="drive" value="3"></td>
+            <td><input type="radio" name="drive" value="4"></td>
+            <td><input type="radio" name="drive" value="5"></td>
+            <td>
+              <div class="chips">
+                <label><input type="checkbox" name="drive_auto"> Auto</label>
+                <label><input type="checkbox" name="drive_bus"> Autobús</label>
+                <label><input type="checkbox" name="drive_moto"> Moto</label>
+                <label><input type="checkbox" name="drive_tren"> Tren</label>
+                <label><input type="checkbox" name="drive_camion"> Camión</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Vida profesional</td>
+            <td><input type="radio" name="vida" value="0"></td>
+            <td><input type="radio" name="vida" value="1"></td>
+            <td><input type="radio" name="vida" value="2"></td>
+            <td><input type="radio" name="vida" value="3"></td>
+            <td><input type="radio" name="vida" value="4"></td>
+            <td><input type="radio" name="vida" value="5"></td>
+            <td>
+              <div class="chips">
+                <label><input type="checkbox" name="work_cerca"> Cerca</label>
+                <label><input type="checkbox" name="work_inter_cercano"> Intermedio y cercano</label>
+                <label><input type="checkbox" name="work_inter_laboral"> Intermedio laboral</label>
+                <label><input type="checkbox" name="work_lejos"> Lejos</label>
+                <label><input type="checkbox" name="work_inter_lejano"> Intermedio y lejano</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Deportes y recreación</td>
+            <td><input type="radio" name="sport" value="0"></td>
+            <td><input type="radio" name="sport" value="1"></td>
+            <td><input type="radio" name="sport" value="2"></td>
+            <td><input type="radio" name="sport" value="3"></td>
+            <td><input type="radio" name="sport" value="4"></td>
+            <td><input type="radio" name="sport" value="5"></td>
+            <td>
+              <div class="chips">
+                <label><input type="checkbox" name="sport_gimnasia"> Gimnasia</label>
+                <label><input type="checkbox" name="sport_correr"> Correr y caminar</label>
+                <label><input type="checkbox" name="sport_golf"> Golf</label>
+                <label><input type="checkbox" name="sport_tenis"> Tenis</label>
+                <label><input type="checkbox" name="sport_pelota"> Juegos de pelota</label>
+                <label><input type="checkbox" name="sport_ciclismo"> Ciclismo</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Computadoras y dispositivos digitales</td>
+            <td><input type="radio" name="comp" value="0"></td>
+            <td><input type="radio" name="comp" value="1"></td>
+            <td><input type="radio" name="comp" value="2"></td>
+            <td><input type="radio" name="comp" value="3"></td>
+            <td><input type="radio" name="comp" value="4"></td>
+            <td><input type="radio" name="comp" value="5"></td>
+            <td>
+              <div class="chips">
+                <label><input type="checkbox" name="comp_pc"> Computador</label>
+                <label><input type="checkbox" name="comp_portatil"> Computadora portátil</label>
+                <label><input type="checkbox" name="comp_varios"> Varios dispositivos</label>
+                <label><input type="checkbox" name="comp_tableta"> Tableta</label>
+                <label><input type="checkbox" name="comp_phone"> Teléfonos inteligentes</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Lectura</td>
+            <td><input type="radio" name="lect" value="0"></td>
+            <td><input type="radio" name="lect" value="1"></td>
+            <td><input type="radio" name="lect" value="2"></td>
+            <td><input type="radio" name="lect" value="3"></td>
+            <td><input type="radio" name="lect" value="4"></td>
+            <td><input type="radio" name="lect" value="5"></td>
+            <td>
+              <div class="chips">
+                <label><input type="checkbox" name="lect_libro"> Libro</label>
+                <label><input type="checkbox" name="lect_digital"> Dispositivos digitales</label>
+                <label><input type="checkbox" name="lect_periodico"> Periódico</label>
+                <label><input type="checkbox" name="lect_revista"> Revista</label>
+                <label><input type="checkbox" name="lect_varios"> Varios medios</label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Medidas del marco -->
+    <div class="section">
+      <h3>MEDIDAS DEL MARCO</h3>
+      <div class="two soft">
+        <div>
+          <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo / derecho</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div><label>DNP (OI)</label><input class="input" name="dnp_oi"></div>
+            <div><label>DNP (OD)</label><input class="input" name="dnp_od"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+            <div><label>Altura pupilar (OI)</label><input class="input" name="altura_pupilar_oi"></div>
+            <div><label>Altura pupilar (OD)</label><input class="input" name="altura_pupilar_od"></div>
+          </div>
+          <div style="margin-top:6px">
+            <label>Altura total del cristalino</label><input class="input" name="altura_total_cristalino">
+          </div>
+          <div style="margin-top:6px">
+            <label>Distancia al vértice</label><input class="input" name="distancia_al_vertice">
+          </div>
+        </div>
+        <div>
+          <div><label>Inclinación pantoscópica</label><input class="input" name="inclinacion_pantoscopica"></div>
+          <div style="margin-top:6px"><label>Curva del borde</label><input class="input" name="curva_del_borde"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gafas anteriores + Receta previa -->
+    <div class="section">
+      <h3>GAFAS ANTERIORES</h3>
+      <div class="two soft">
+        <div>
+          <label>Tipo de lente</label><input class="input" name="tipo_lente">
+          <label style="margin-top:6px">Proveedor</label>
+          <div class="chips">
+            <label><input type="radio" name="proveedor" value="HOYA"> HOYA</label>
+            <label><input type="radio" name="proveedor" value="Otro"> Otro</label>
+          </div>
+          <label style="margin-top:6px">Diseño</label><input class="input" name="diseno">
+          <label style="margin-top:6px">Longitud del pasillo</label><input class="input" name="longitud_pasillo">
+        </div>
+        <div>
+          <h4 style="margin:0 0 6px;color:#7a2b6c">RECETA PREVIA</h4>
+          <div style="font-weight:700;margin:2px 0 6px">Ojo izquierdo</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div><label>Esférico</label><input class="input" name="rp_esf_oi"></div>
+            <div><label>Cilíndrico</label><input class="input" name="rp_cil_oi"></div>
+            <div><label>Eje</label><input class="input" name="rp_eje_oi"></div>
+            <div><label>Adición</label><input class="input" name="rp_adic_oi"></div>
+          </div>
+          <div style="font-weight:700;margin:10px 0 6px">Ojo derecho</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div><label>Esférico</label><input class="input" name="rp_esf_od"></div>
+            <div><label>Cilíndrico</label><input class="input" name="rp_cil_od"></div>
+            <div><label>Eje</label><input class="input" name="rp_eje_od"></div>
+            <div><label>Adición</label><input class="input" name="rp_adic_od"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Satisfacción -->
+    <div class="section">
+      <h3>NIVEL DE SATISFACCIÓN</h3>
+      <div class="chips">
+        <label><input type="radio" name="satisfaccion" value="Muy satisfecho"> Muy satisfecho</label>
+        <label><input type="radio" name="satisfaccion" value="Satisfecho"> Satisfecho</label>
+        <label><input type="radio" name="satisfaccion" value="Neutral"> Neutral</label>
+        <label><input type="radio" name="satisfaccion" value="Insatisfecho"> Insatisfecho</label>
+        <label><input type="radio" name="satisfaccion" value="Muy insatisfecho"> Muy insatisfecho</label>
+      </div>
+    </div>
+
+    <div class="foot-logos">
+      <img src="Imagen_Hoya.jpg" alt="HOYA">
+      <img src="Imagen_tecnologia.jpg" alt="Tecnología japonesa">
+    </div>
+
+  </section>
+
 </form>
 
 <script>
-/* Cambia por tu URL (Web App desplegado con acceso “Cualquiera”)
-   Si vuelves a desplegar y cambia la URL, solo reemplázala aquí. */
+/* URL de tu Web App de Apps Script (acceso: Cualquiera con el enlace) */
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz8wYVJCHIBZPW2mzkpBkSUdGUzddeNmXcgpZmeTOfHHgiL1WcA1CMHIM8G4CaG5iMGEQ/exec";
 
 async function sendAndPrint(){
@@ -383,10 +584,7 @@ async function sendAndPrint(){
     const fd = new FormData(form);
     fd.append('timestamp', new Date().toLocaleString());
 
-    // Para evitar bloqueos CORS en Apps Script, usamos no-cors
     await fetch(WEB_APP_URL, { method:'POST', body:fd, mode:'no-cors' });
-
-    // Da un pequeño respiro al envío y abre el diálogo de impresión
     setTimeout(() => window.print(), 300);
   }catch(e){
     alert('Error al enviar/imprimir: ' + e.message);
@@ -397,4 +595,3 @@ async function sendAndPrint(){
 </script>
 </body>
 </html>
-
