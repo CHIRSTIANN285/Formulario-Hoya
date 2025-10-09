@@ -628,7 +628,7 @@ async function sendOrder(e){
 
     // Marca de tiempo y asunto
     fd.append('timestamp', new Date().toLocaleString('es-PE'));
-    const paciente = ((fd.get('nombre')||'')+' '+(fd.get('apellidos')||'')).trim();
+    const paciente = ((fd.get('nombre')||'')+' '+(fd.get('sistema')||'')).trim();
     fd.append('subject', `Orden ${fd.get('order_id')} – iD Myself – ${paciente}`);
 
     // Genera PDF del contenedor .sheet en Base64 (data URI)
