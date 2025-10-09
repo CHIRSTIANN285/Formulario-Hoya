@@ -178,7 +178,7 @@ label{font-size:12px; color:#475569; display:block}
 
     <div class="top-actions">
       <!-- SIN input de correo; se envía por defecto al email configurado -->
-      <button id="sendBtn" class="btn" onclick="sendOrder(event)">Enviar orden (PDF al correo + guardar en Sheet)</button>
+      <button id="sendBtn" class="btn" onclick="sendOrder(event)">Generar Orden y enviar a Trimax</button>
       <button class="btn btn-ghost" onclick="newOrder(event)">Generar nueva orden</button>
     </div>
   </div>
@@ -585,7 +585,7 @@ function setOrderPill(id, ok=false){
   pill.classList.toggle('ok', ok);
   const st = document.getElementById('orderStatus');
   st.classList.toggle('ok', ok);
-  st.innerHTML = ok ? '<span class="check"></span> Orden enviada'
+  st.innerHTML = ok ? '<span class="check"></span> Orden enviada un ejecutivo de Trimax se comunicará con usted'
                     : '<span class="check"></span> Orden pendiente';
 }
 
