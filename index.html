@@ -30,16 +30,14 @@ body{
   --ok-ink:#0a654d;
 }
 
-/* ===== Barra superior: orden + botones ===== */
+/* ===== Barra superior ===== */
 .topbar{
   position: sticky; top:0; z-index:30;
   background:var(--hoya-navy);
   padding:16px 0 20px;
   box-shadow:0 6px 16px rgba(2,6,23,.18);
 }
-.wrap{
-  width:210mm; max-width:100%; margin:0 auto; padding:0 12mm;
-}
+.wrap{ width:210mm; max-width:100%; margin:0 auto; padding:0 12mm; }
 .order-row{
   display:flex; align-items:center; gap:14px;
   background:rgba(255,255,255,.08);
@@ -53,24 +51,17 @@ body{
   min-width:280px; justify-content:center;
 }
 .order-pill.ok{ background:var(--ok); color:#fff; }
-.order-status{
-  display:inline-flex; align-items:center; gap:8px; opacity:.9
-}
+.order-status{ display:inline-flex; align-items:center; gap:8px; opacity:.9 }
 .order-status .check{
   width:16px; height:16px; border-radius:50%;
-  border:2px solid #cbe6ff; display:inline-block;
-  position:relative;
+  border:2px solid #cbe6ff; display:inline-block; position:relative;
 }
-.order-status.ok .check{
-  border-color:#d1fae5;
-}
+.order-status.ok .check{ border-color:#d1fae5; }
 .order-status.ok .check::after{
   content:""; position:absolute; left:3px; top:0px;
   width:8px; height:14px; border-right:3px solid #d1fae5; border-bottom:3px solid #d1fae5;
   transform:rotate(40deg);
 }
-
-/* botones */
 .btn{
   background:#fff; color:var(--hoya-navy);
   border:0; padding:12px 18px; border-radius:10px;
@@ -80,42 +71,25 @@ body{
 }
 .btn:active{ transform: translateY(1px) }
 .btn:disabled{opacity:.6;cursor:not-allowed}
-.btn-ghost{
-  background:transparent; color:#fff; border:2px solid #fff;
-}
-.top-actions{
-  display:flex; justify-content:center; gap:14px; margin-top:14px; flex-wrap:wrap; align-items:center;
-}
-.input-top{
-  height:36px; border-radius:8px; border:0; padding:0 10px; outline:none; min-width:260px;
-}
+.btn-ghost{ background:transparent; color:#fff; border:2px solid #fff; }
+.top-actions{ display:flex; justify-content:center; gap:14px; margin-top:14px; flex-wrap:wrap; align-items:center; }
 
 /* ===== Hoja ===== */
 .sheet{ width:210mm; margin:0 auto; }
 .page{
-  background:#fff;
-  box-shadow:0 10px 28px rgba(15,23,42,.15);
-  margin:10mm 0;
-  padding:0;
+  background:#fff; box-shadow:0 10px 28px rgba(15,23,42,.15);
+  margin:10mm 0; padding:0;
 }
 
 /* ===== Hero ===== */
 .hero{
-  position:relative;
-  width: 210mm;
-  height: 73mm;              /* puedes bajar a 65–70mm si quieres */
-  margin: 0 auto;
+  position:relative; width:210mm; height:73mm; margin:0 auto;
   background:#ddd url('idmyself_header.jpg') center/cover no-repeat;
 }
-.hero .band{
-  position:absolute; left:0; right:0; bottom:8mm;
-  display:flex; justify-content:center;
-}
+.hero .band{ position:absolute; left:0; right:0; bottom:8mm; display:flex; justify-content:center; }
 .hero .title{
-  background:var(--hoya-navy);
-  color:#fff; font-weight:900; letter-spacing:.04em;
-  padding:10px 20px; border-radius:8px;
-  box-shadow:0 10px 22px rgba(2,6,23,.25);
+  background:var(--hoya-navy); color:#fff; font-weight:900; letter-spacing:.04em;
+  padding:10px 20px; border-radius:8px; box-shadow:0 10px 22px rgba(2,6,23,.25);
 }
 
 /* ===== Secciones ===== */
@@ -124,29 +98,22 @@ body{
   margin:0 0 6mm; color:#6d1c5e; letter-spacing:.2px;
   font-size:13.5px; display:flex; align-items:center; gap:8px;
 }
-.section h3::before{
-  content:""; width:12px; height:12px; border-radius:3px; background:var(--hoya-navy);
-}
+.section h3::before{ content:""; width:12px; height:12px; border-radius:3px; background:var(--hoya-navy); }
 
-/* ===== Panel azul (información personal) ===== */
+/* ===== Panel azul ===== */
 .personal{
-  background:var(--hoya-navy); color:#e6eefc;
-  border-radius:10px; padding:10mm 12mm;
+  background:var(--hoya-navy); color:#e6eefc; border-radius:10px; padding:10mm 12mm;
   --g:22px; background-image:
     linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
   background-size:var(--g) var(--g), var(--g) var(--g);
 }
-.personal h3{color:#fff}
-.personal h3::before{background:#fff}
+.personal h3{color:#fff} .personal h3::before{background:#fff}
 .personal label{color:#e6eefc}
 .grid{display:grid; gap:10px 14px}
-.col-6{grid-column:span 6}
-.col-4{grid-column:span 4}
-.col-8{grid-column:span 8}
+.col-6{grid-column:span 6} .col-4{grid-column:span 4} .col-8{grid-column:span 8}
 .input, .line{
-  width:100%; height:26px;
-  border:none; border-bottom:1.5px solid rgba(255,255,255,.75);
+  width:100%; height:26px; border:none; border-bottom:1.5px solid rgba(255,255,255,.75);
   background:transparent; color:#fff; font:inherit;
 }
 .input::placeholder, .line::placeholder{ color:#dce7ff }
@@ -155,15 +122,14 @@ body{
 /* ===== Caja rosada ===== */
 .soft .input, .soft .line{
   background:var(--rose); color:var(--ink);
-  border:1px solid var(--rose-border);
-  border-radius:6px; height:28px; padding:0 8px;
+  border:1px solid var(--rose-border); border-radius:6px; height:28px; padding:0 8px;
 }
 label{font-size:12px; color:#475569; display:block}
 
-/* ===== Dos columnas grandes ===== */
+/* ===== Dos columnas ===== */
 .two{display:grid; grid-template-columns: 1fr 1fr; gap:12mm}
 
-/* ===== Chips (radios) ===== */
+/* ===== Chips ===== */
 .chips{display:flex; flex-wrap:wrap; gap:6px}
 .chip{
   border:1px solid #e2e8f0; border-radius:999px;
@@ -171,55 +137,37 @@ label{font-size:12px; color:#475569; display:block}
   display:inline-flex; align-items:center; gap:6px;
 }
 .chip input{ appearance:none; width:0; height:0; margin:0 }
-.chip:has(input:checked){
-  background:var(--rose); border-color:#e7cfe0; color:var(--accent);
-}
+.chip:has(input:checked){ background:var(--rose); border-color:#e7cfe0; color:var(--accent); }
 
-/* ===== Banner azul intermedio ===== */
+/* ===== Banner ===== */
 .banner{ height:32mm; background:var(--hoya-navy) }
 .banner img{ width:100%; height:100%; object-fit:cover; opacity:.9 }
 
-/* ===== Tabla 0–5 ===== */
+/* ===== Tablas ===== */
 .table{ border-collapse:collapse; width:100%; font-size:11.5px }
 .table th,.table td{ border:1px solid #eef2ff; padding:6px 8px; vertical-align:top }
 .table th{ background:#f8fafc; color:#334155; font-weight:800 }
-
-/* ==== Tabla Importancia ==== */
-.table.imp { 
-  table-layout: fixed; width: 100%; border-collapse: collapse; font-size: 11.5px;
-}
-.table.imp col.col-act     { width: 34%; }
-.table.imp col.col-score   { width: 6%;  }
-.table.imp col.col-details { width: 30%; }
-.table.imp th,.table.imp td{
-  border:1px solid #eef2ff; padding:8px 6px; vertical-align:middle; background:#fff
-}
+.table.imp { table-layout: fixed; width:100%; border-collapse: collapse; font-size: 11.5px; }
+.table.imp col.col-act{ width: 34%; } .table.imp col.col-score{ width: 6%; } .table.imp col.col-details{ width: 30%; }
+.table.imp th,.table.imp td{ border:1px solid #eef2ff; padding:8px 6px; vertical-align:middle; background:#fff }
 .table.imp th{ background:#f8fafc; color:#334155; font-weight:800; white-space:nowrap }
 .table.imp td.center { text-align:center }
 .table.imp input[type="radio"]{ transform:scale(1.05) }
 .table.imp .chips.flow{ display:flex; flex-wrap:wrap; gap:8px }
 .table.imp .chips.flow .chip{ margin:2px 0 }
 
-/* ===== Logos al pie ===== */
-.foot-logos{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:8mm 12mm 10mm;
-}
+/* ===== Logos ===== */
+.foot-logos{ display:flex; justify-content:space-between; align-items:center; padding:8mm 12mm 10mm; }
 .foot-logos img{ height:16mm }
 
-/* Romper a la página siguiente */
+/* ===== Print ===== */
 .page-break{ page-break-before:always }
-
-/* Ocultar elementos pantalla al imprimir (opcional) */
-@media print{
-  .topbar{display:none}
-  .page{box-shadow:none; margin:0}
-}
+@media print{ .topbar{display:none} .page{box-shadow:none; margin:0} }
 </style>
 </head>
 <body>
 
-<!-- ======= Barra superior con número de orden + acciones ======= -->
+<!-- ======= Barra superior ======= -->
 <div class="topbar">
   <div class="wrap">
     <div class="order-row">
@@ -229,7 +177,7 @@ label{font-size:12px; color:#475569; display:block}
     </div>
 
     <div class="top-actions">
-      <input id="emailTo" class="input-top" type="email" placeholder="Correo destino" />
+      <!-- SIN input de correo; se envía por defecto al email configurado -->
       <button id="sendBtn" class="btn" onclick="sendOrder(event)">Enviar orden (PDF al correo + guardar en Sheet)</button>
       <button class="btn btn-ghost" onclick="newOrder(event)">Generar nueva orden</button>
     </div>
@@ -246,11 +194,10 @@ label{font-size:12px; color:#475569; display:block}
       <div class="band"><div class="title">FORMULARIO IDENTIFIER · iD MYSELF · HOYALUX</div></div>
     </div>
 
-    <!-- Información personal (panel azul) -->
+    <!-- Información personal -->
     <div class="section personal">
       <h3>INFORMACIÓN PERSONAL</h3>
       <div class="grid" style="grid-template-columns: repeat(12, 1fr);">
-        <!-- Nombre del cliente -->
         <div class="col-6">
           <label>Nombre del cliente</label>
           <input class="line" name="sistema" placeholder="Nombre del cliente" />
@@ -284,7 +231,6 @@ label{font-size:12px; color:#475569; display:block}
     <div class="section">
       <h3>PRESCRIPCIÓN</h3>
       <div class="two soft">
-        <!-- Ojo izquierdo -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
           <label>Esférico</label><input class="input" name="esf_oi">
@@ -292,16 +238,12 @@ label{font-size:12px; color:#475569; display:block}
             <div><label>Cilíndrico</label><input class="input" name="cil_oi"></div>
             <div><label>Eje</label><input class="input" name="eje_oi"></div>
           </div>
-
           <label>Adición</label><input class="input" name="adic_oi">
-
           <label>Prisma</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="prisma_oi" value="Si"><span>Sí</span></label>
             <label class="chip"><input type="radio" name="prisma_oi" value="No"><span>No</span></label>
           </div>
-
-          <!-- Prisma OI -->
           <div style="margin-top:8px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end">
             <div><label>Horizontal (valor)</label><input class="input" name="prisma_h_oi_val"></div>
             <label class="chip"><input type="radio" name="horiz_oi" value="Nasal"><span>Nasal</span></label>
@@ -315,7 +257,6 @@ label{font-size:12px; color:#475569; display:block}
           <label style="margin-top:8px">Resultado</label><input class="input" name="prisma_res_oi">
         </div>
 
-        <!-- Ojo derecho -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
           <label>Esférico</label><input class="input" name="esf_od">
@@ -323,16 +264,12 @@ label{font-size:12px; color:#475569; display:block}
             <div><label>Cilíndrico</label><input class="input" name="cil_od"></div>
             <div><label>Eje</label><input class="input" name="eje_od"></div>
           </div>
-
           <label>Adición</label><input class="input" name="adic_od">
-
           <label>Primer par de lentes</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="primer_par" value="Si"><span>Sí</span></label>
             <label class="chip"><input type="radio" name="primer_par" value="No"><span>No</span></label>
           </div>
-
-          <!-- Prisma OD -->
           <div style="margin-top:8px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end">
             <div><label>Horizontal (valor)</label><input class="input" name="prisma_h_od_val"></div>
             <label class="chip"><input type="radio" name="horiz_od" value="Nasal"><span>Nasal</span></label>
@@ -399,10 +336,9 @@ label{font-size:12px; color:#475569; display:block}
   <!-- ============ PÁGINA 2 ============ -->
   <section class="page page-break">
 
-    <!-- Clasificación de actividades -->
+    <!-- Tabla de actividades -->
     <div class="section">
       <h3>CLASIFICACIÓN DE IMPORTANCIA DE CADA ACTIVIDAD · 0 = poco importante, 5 = muy importante</h3>
-
       <table class="table imp">
         <colgroup>
           <col class="col-act">
@@ -553,12 +489,8 @@ label{font-size:12px; color:#475569; display:block}
             <div><label>Altura pupilar (OI)</label><input class="input" name="altura_pupilar_oi"></div>
             <div><label>Altura pupilar (OD)</label><input class="input" name="altura_pupilar_od"></div>
           </div>
-          <div style="margin-top:6px">
-            <label>Altura total del cristalino</label><input class="input" name="altura_total_cristalino">
-          </div>
-          <div style="margin-top:6px">
-            <label>Distancia al vértice</label><input class="input" name="distancia_al_vertice">
-          </div>
+          <div style="margin-top:6px"><label>Altura total del cristalino</label><input class="input" name="altura_total_cristalino"></div>
+          <div style="margin-top:6px"><label>Distancia al vértice</label><input class="input" name="distancia_al_vertice"></div>
         </div>
         <div>
           <div><label>Inclinación pantoscópica</label><input class="input" name="inclinacion_pantoscopica"></div>
@@ -590,7 +522,6 @@ label{font-size:12px; color:#475569; display:block}
             <div><label>Eje</label><input class="input" name="rp_eje_oi"></div>
             <div><label>Adición</label><input class="input" name="rp_adic_oi"></div>
           </div>
-
           <div style="font-weight:700;margin:10px 0 6px">Ojo derecho</div>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
             <div><label>Esférico</label><input class="input" name="rp_esf_od"></div>
@@ -598,8 +529,6 @@ label{font-size:12px; color:#475569; display:block}
             <div><label>Eje</label><input class="input" name="rp_eje_od"></div>
             <div><label>Adición</label><input class="input" name="rp_adic_od"></div>
           </div>
-
-          <!-- Prisma en RECETA PREVIA (Ojo derecho) -->
           <label style="margin-top:8px">Prisma</label>
           <div class="chips">
             <label class="chip"><input type="radio" name="rp_prisma_od" value="Si"><span>Sí</span></label>
@@ -628,29 +557,25 @@ label{font-size:12px; color:#475569; display:block}
 
   </section>
 
-  <!-- campo oculto para mandar Nº de orden -->
+  <!-- campo oculto para Nº de orden -->
   <input type="hidden" name="order_id" id="orderIdField" />
 </form>
 
-<!-- Librería para generar PDF desde HTML -->
+<!-- Librería para generar PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
 
 <script>
 /* ======= CONFIG ======= */
-const WEB_APP_URL   = "https://script.google.com/macros/s/AKfycbxe1smphXltHO3IsWf1kBnpqachB_U_W9IsqbOKklKcg4grAleurg7KiCa5QXn_tL5ukg/exec"; // <--- cambia esto
-const DEFAULT_EMAIL = "garcia2020christiann@gmail.com"; // opcional: fija un correo si no quieres usar el input
-const SHARED_TOKEN  = ""; // opcional: si usas token en Apps Script
+const WEB_APP_URL   = "https://script.google.com/macros/s/AKfycbxe1smphXltHO3IsWf1kBnpqachB_U_W9IsqbOKklKcg4grAleurg7KiCa5QXn_tL5ukg/exec";
+const DEFAULT_EMAIL = "garcia2020christian@gmail.com"; // correo fijo
+const SHARED_TOKEN  = ""; // si lo usas, debe coincidir con TOKEN en Apps Script
 
 /* ======= Utilidades ======= */
 function pad(n){return String(n).padStart(2,'0')}
 function generateOrderId(){
   const d = new Date();
-  const yyyy = d.getFullYear();
-  const mm = pad(d.getMonth()+1);
-  const dd = pad(d.getDate());
-  const hh = pad(d.getHours());
-  const mi = pad(d.getMinutes());
-  const ss = pad(d.getSeconds());
+  const yyyy=d.getFullYear(), mm=pad(d.getMonth()+1), dd=pad(d.getDate());
+  const hh=pad(d.getHours()), mi=pad(d.getMinutes()), ss=pad(d.getSeconds());
   const rand = Math.floor(1000 + Math.random()*9000);
   return `TRX-${yyyy}${mm}${dd}-${hh}${mi}${ss}-${rand}`;
 }
@@ -664,7 +589,7 @@ function setOrderPill(id, ok=false){
                     : '<span class="check"></span> Orden pendiente';
 }
 
-/* ======= Nueva orden (resetea) ======= */
+/* ======= Nueva orden ======= */
 function newOrder(e){
   if(e) e.preventDefault();
   const form = document.getElementById('hoyaForm');
@@ -692,21 +617,21 @@ async function sendOrder(e){
       document.getElementById('orderIdField').value = id;
     }
 
-    // Correo destino
-    const emailInput = document.getElementById('emailTo');
-    const sendTo = (emailInput && emailInput.value) ? emailInput.value.trim() : (DEFAULT_EMAIL || "");
-    if(!sendTo){ alert('Ingresa un correo destino o configura DEFAULT_EMAIL.'); btn.disabled=false; return; }
-    fd.append('send_to', sendTo);
+    // Correo destino (fijo)
+    fd.append('send_to', DEFAULT_EMAIL);
 
-    // (Opcional) token
+    // (Opcional) token compartido
     if (SHARED_TOKEN) fd.append('token', SHARED_TOKEN);
+
+    // Guardado en Sheet activado
+    fd.append('log', '1');
 
     // Marca de tiempo y asunto
     fd.append('timestamp', new Date().toLocaleString('es-PE'));
     const paciente = ((fd.get('nombre')||'')+' '+(fd.get('apellidos')||'')).trim();
     fd.append('subject', `Orden ${fd.get('order_id')} – iD Myself – ${paciente}`);
 
-    // Genera PDF del contenedor .sheet
+    // Genera PDF del contenedor .sheet en Base64 (data URI)
     const el = document.querySelector('.sheet');
     const opt = {
       margin: 0,
@@ -715,18 +640,15 @@ async function sendOrder(e){
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit:'mm', format:'a4', orientation:'portrait' }
     };
-// Genera PDF como DataURI Base64 (más robusto para Apps Script)
-const dataUri = await html2pdf().from(el).set(opt).outputPdf('datauristring');
-// dataUri = "data:application/pdf;base64,JVBERi0xLjcKJc..."
-const b64 = dataUri.split(',')[1]; // quita el prefijo
-fd.append('pdf_b64', b64);         // enviamos el base64
-fd.append('pdf_name', `${fd.get('order_id')}.pdf`); // nombre sugerido
+    const dataUri = await html2pdf().from(el).set(opt).outputPdf('datauristring');
+    const b64 = dataUri.split(',')[1]; // quita el prefijo data:
+    fd.append('pdf_b64', b64);
+    fd.append('pdf_name', `${fd.get('order_id')}.pdf`);
 
-
-    // Enviar al Web App (Apps Script: enviará correo y guardará en Sheet por encabezados)
+    // Enviar al Web App (Apps Script enviará email y guardará en Sheets)
     await fetch(WEB_APP_URL, { method:'POST', body: fd, mode:'no-cors' });
 
-    // Marca estado OK
+    // Estado OK
     setOrderPill(fd.get('order_id'), true);
 
   }catch(err){
@@ -741,3 +663,4 @@ newOrder();
 </script>
 </body>
 </html>
+
