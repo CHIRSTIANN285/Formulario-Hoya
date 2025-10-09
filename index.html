@@ -28,7 +28,7 @@ body{
   --accent:#7a2b6c;
 }
 
-/* ===== Barra superior con Nº de orden y botón ===== */
+/* ===== Barra superior ===== */
 .toolbar{ position:sticky; top:0; z-index:20; background:var(--hoya-navy); padding:10px; box-shadow:0 6px 16px rgba(2,6,23,.18) }
 .toolbar-inner{ max-width:210mm; margin:0 auto; display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap }
 .btn{
@@ -37,6 +37,14 @@ body{
   font-weight:800; cursor:pointer;
 }
 .btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-secondary{
+  background:transparent;
+  color:#ffffff;
+  border:2px solid #ffffff;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:800;
+}
 .order-wrap{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.1); padding:6px 10px; border-radius:10px }
 .order-label{ color:#fff; font-weight:700; font-size:12px; letter-spacing:.2px }
 .order-box{
@@ -60,8 +68,8 @@ body{
 /* ===== Hero ===== */
 .hero{
   position:relative;
-  width:210mm;              /* ancho del banner */
-  height:73mm;              /* alto del banner */
+  width:210mm;
+  height:73mm;
   margin:0 auto;
   background:#ddd url('idmyself_header.jpg') center/cover no-repeat;
 }
@@ -118,7 +126,7 @@ body{
 }
 label{font-size:12px; color:var(--muted); display:block}
 
-/* ===== Dos columnas grandes ===== */
+/* ===== Dos columnas ===== */
 .two{display:grid; grid-template-columns: 1fr 1fr; gap:12mm}
 
 /* ===== Chips (radios) ===== */
@@ -132,7 +140,7 @@ label{font-size:12px; color:var(--muted); display:block}
   background:var(--rose); border-color:#e7cfe0; color:var(--accent);
 }
 
-/* ===== Banner azul intermedio con fotos ===== */
+/* ===== Banner intermedio ===== */
 .banner{ height:32mm; background:var(--hoya-navy) }
 .banner img{ width:100%; height:100%; object-fit:cover; opacity:.9 }
 
@@ -141,17 +149,17 @@ label{font-size:12px; color:var(--muted); display:block}
 .table th,.table td{ border:1px solid #eef2ff; padding:6px 8px; vertical-align:top }
 .table th{ background:#f8fafc; color:#334155; font-weight:800 }
 
-/* ===== Logos al pie de cada página ===== */
+/* ===== Logos pie ===== */
 .foot-logos{
   display:flex; justify-content:space-between; align-items:center;
   padding:8mm 12mm 10mm;
 }
 .foot-logos img{ height:16mm }
 
-/* Romper a la página siguiente */
+/* Salto de página */
 .page-break{ page-break-before:always }
 
-/* Ocultar elementos pantalla al imprimir (opcional) */
+/* Impresión */
 @media print{
   .toolbar{display:none}
   .page{box-shadow:none; margin:0}
@@ -160,7 +168,7 @@ label{font-size:12px; color:var(--muted); display:block}
 </head>
 <body>
 
-<!-- ===== Barra: Nº de orden + botón ===== -->
+<!-- ===== Barra: Nº de orden + botones ===== -->
 <div class="toolbar">
   <div class="toolbar-inner">
     <div class="order-wrap">
@@ -171,6 +179,10 @@ label{font-size:12px; color:var(--muted); display:block}
 
     <button id="sendPrintBtn" class="btn" onclick="sendAndPrint()">
       Enviar orden a Trimax y Descargar DOC
+    </button>
+
+    <button type="button" class="btn-secondary" onclick="newOrder()">
+      Generar nueva Orden
     </button>
   </div>
 </div>
@@ -222,6 +234,7 @@ label{font-size:12px; color:var(--muted); display:block}
     <div class="section">
       <h3>PRESCRIPCIÓN</h3>
       <div class="two soft">
+        <!-- Ojo izquierdo -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
           <label>Esférico</label><input class="input" name="esf_oi">
@@ -237,6 +250,7 @@ label{font-size:12px; color:var(--muted); display:block}
           </div>
         </div>
 
+        <!-- Ojo derecho -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
           <label>Esférico</label><input class="input" name="esf_od">
@@ -258,6 +272,7 @@ label{font-size:12px; color:var(--muted); display:block}
     <div class="section">
       <h3>INFORMACIÓN DEL PRISMA</h3>
       <div class="two soft">
+        <!-- OI -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
           <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end">
@@ -265,14 +280,17 @@ label{font-size:12px; color:var(--muted); display:block}
             <label class="chips"><input type="radio" name="horiz_oi" value="Nasal"> Nasal</label>
             <label class="chips"><input type="radio" name="horiz_oi" value="Temporal"> Temporal</label>
           </div>
+
           <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end;margin-top:6px">
             <div><label>Vertical (valor)</label><input class="input" name="prisma_v_oi_val"></div>
             <label class="chips"><input type="radio" name="vert_oi" value="Nasal"> Nasal</label>
             <label class="chips"><input type="radio" name="vert_oi" value="Temporal"> Temporal</label>
           </div>
+
           <label style="margin-top:6px">Resultado</label><input class="input" name="prisma_res_oi">
         </div>
 
+        <!-- OD -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
           <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end">
@@ -280,11 +298,13 @@ label{font-size:12px; color:var(--muted); display:block}
             <label class="chips"><input type="radio" name="horiz_od" value="Nasal"> Nasal</label>
             <label class="chips"><input type="radio" name="horiz_od" value="Temporal"> Temporal</label>
           </div>
+
           <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end;margin-top:6px">
             <div><label>Vertical (valor)</label><input class="input" name="prisma_v_od_val"></div>
             <label class="chips"><input type="radio" name="vert_od" value="Nasal"> Nasal</label>
             <label class="chips"><input type="radio" name="vert_od" value="Temporal"> Temporal</label>
           </div>
+
           <label style="margin-top:6px">Resultado</label><input class="input" name="prisma_res_od">
         </div>
       </div>
@@ -547,13 +567,14 @@ label{font-size:12px; color:var(--muted); display:block}
 </form>
 
 <script>
-/* ===== URL de tu Apps Script desplegado (Web App, acceso “Cualquiera”) ===== */
+/* ===== URL de tu Apps Script ===== */
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz8wYVJCHIBZPW2mzkpBkSUdGUzddeNmXcgpZmeTOfHHgiL1WcA1CMHIM8G4CaG5iMGEQ/exec";
 
-/* ====== Generación y persistencia del Nº de orden ====== */
+/* ===== Claves de almacenamiento ===== */
 const ORDER_KEY = "trimax_order_id";
 const ORDER_SENT_KEY = "trimax_order_sent";
 
+/* ===== Utilidades de orden ===== */
 function genOrderId(){
   const d = new Date();
   const pad = n => String(n).padStart(2,"0");
@@ -574,8 +595,7 @@ function getOrCreateOrderId(){
 function hydrateOrderUI(sent=false){
   const box = document.getElementById("orderBox");
   const status = document.getElementById("orderStatus");
-  const id = getOrCreateOrderId();
-  box.textContent = id;
+  box.textContent = getOrCreateOrderId();
   if(sent){
     box.classList.add("ok");
     status.textContent = "Orden generada, alguien de Trimax se contactará con usted";
@@ -586,6 +606,8 @@ function hydrateOrderUI(sent=false){
     status.classList.remove("show");
   }
 }
+
+/* ===== Inicialización ===== */
 document.addEventListener("DOMContentLoaded", () => {
   const alreadySent = localStorage.getItem(ORDER_SENT_KEY) === "true";
   hydrateOrderUI(alreadySent);
@@ -619,17 +641,32 @@ async function sendAndPrint(){
   }
 }
 
-/* (Opcional) Si editan el nombre del cliente, renueva el Nº de orden */
-const clienteInput = document.addEventListener('DOMContentLoaded', () => {
-  const ci = document.querySelector('input[name="sistema"]');
-  if(ci){
-    ci.addEventListener('input', () => {
-      localStorage.removeItem(ORDER_KEY);
-      localStorage.removeItem(ORDER_SENT_KEY);
-      hydrateOrderUI(false);
-    });
-  }
+/* ===== Generar nueva orden: limpia formulario y crea ID nuevo ===== */
+function newOrder(){
+  // Borrar estado anterior e ID
+  localStorage.removeItem(ORDER_SENT_KEY);
+  localStorage.removeItem(ORDER_KEY);
+
+  // Forzar creación de nuevo ID y refrescar UI (sin enviado)
+  getOrCreateOrderId();
+  hydrateOrderUI(false);
+
+  // Limpiar todos los campos del formulario
+  const form = document.getElementById('hoyaForm');
+  form.reset();
+
+  // Llevar al usuario al inicio y enfocar primer campo
+  window.scrollTo({top:0, behavior:'smooth'});
+  setTimeout(() => document.querySelector('input[name="sistema"]')?.focus(), 300);
+}
+
+/* (Opcional) Si editan el nombre del cliente, renueva Nº de orden automáticamente
+document.querySelector('input[name="sistema"]')?.addEventListener('input', ()=>{
+  localStorage.removeItem(ORDER_KEY);
+  localStorage.removeItem(ORDER_SENT_KEY);
+  hydrateOrderUI(false);
 });
+*/
 </script>
 </body>
 </html>
