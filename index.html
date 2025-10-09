@@ -28,20 +28,25 @@ body{
   --accent:#7a2b6c;
 }
 
-/* ===== Botón superior ===== */
-.toolbar{
-  position: sticky; top:0; z-index:20;
-  display:flex; justify-content:center;
-  background:var(--hoya-navy);
-  padding:10px;
-  box-shadow:0 6px 16px rgba(2,6,23,.18);
-}
+/* ===== Barra superior con Nº de orden y botón ===== */
+.toolbar{ position:sticky; top:0; z-index:20; background:var(--hoya-navy); padding:10px; box-shadow:0 6px 16px rgba(2,6,23,.18) }
+.toolbar-inner{ max-width:210mm; margin:0 auto; display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap }
 .btn{
   background:#fff; color:var(--hoya-navy);
   border:0; padding:10px 16px; border-radius:10px;
   font-weight:800; cursor:pointer;
 }
 .btn:disabled{opacity:.6;cursor:not-allowed}
+.order-wrap{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.1); padding:6px 10px; border-radius:10px }
+.order-label{ color:#fff; font-weight:700; font-size:12px; letter-spacing:.2px }
+.order-box{
+  background:#fff; color:#0a2d6f; border-radius:8px; padding:6px 10px; font-weight:800;
+  min-width:150px; text-align:center; border:2px solid #fff; box-shadow:0 1px 0 rgba(0,0,0,.05)
+}
+.order-box.ok{ background:#10b981; color:#fff; border-color:#10b981 }
+.order-status{ color:#e2fbe8; font-weight:700; font-size:12px; display:none }
+.order-status.show{ display:inline-flex; align-items:center; gap:6px }
+.order-status::before{ content:"✓"; font-weight:800 }
 
 /* ===== Hoja ===== */
 .sheet{ width:210mm; margin:0 auto; }
@@ -55,8 +60,8 @@ body{
 /* ===== Hero ===== */
 .hero{
   position:relative;
-  width:210mm;
-  height:73mm;               /* alto ajustado */
+  width:210mm;              /* ancho del banner */
+  height:73mm;              /* alto del banner */
   margin:0 auto;
   background:#ddd url('idmyself_header.jpg') center/cover no-repeat;
 }
@@ -77,9 +82,7 @@ body{
   margin:0 0 6mm; color:#6d1c5e; letter-spacing:.2px;
   font-size:13.5px; display:flex; align-items:center; gap:8px;
 }
-.section h3::before{
-  content:""; width:12px; height:12px; border-radius:3px; background:var(--hoya-navy);
-}
+.section h3::before{ content:""; width:12px; height:12px; border-radius:3px; background:var(--hoya-navy) }
 
 /* ===== Panel azul (información personal) ===== */
 .personal{
@@ -94,12 +97,11 @@ body{
 .personal h3::before{background:#fff}
 .personal label{color:#e6eefc}
 .grid{display:grid; gap:10px 14px}
-.col-12{grid-template-columns:repeat(12,1fr)}
 .col-6{grid-column:span 6}
 .col-4{grid-column:span 4}
 .col-8{grid-column:span 8}
-.col-3{grid-column:span 3}
 
+/* ===== Inputs ===== */
 .input, .line{
   width:100%; height:26px;
   border:none; border-bottom:1.5px solid rgba(255,255,255,.75);
@@ -129,13 +131,6 @@ label{font-size:12px; color:var(--muted); display:block}
 .chips label:has(input:checked){
   background:var(--rose); border-color:#e7cfe0; color:var(--accent);
 }
-/* separador “ó” entre opciones */
-.chips .chip + .chip::before{
-  content:"ó";
-  margin:0 6px;
-  color:#64748b;
-  font-weight:600;
-}
 
 /* ===== Banner azul intermedio con fotos ===== */
 .banner{ height:32mm; background:var(--hoya-navy) }
@@ -146,16 +141,17 @@ label{font-size:12px; color:var(--muted); display:block}
 .table th,.table td{ border:1px solid #eef2ff; padding:6px 8px; vertical-align:top }
 .table th{ background:#f8fafc; color:#334155; font-weight:800 }
 
-/* ===== Logos al pie ===== */
+/* ===== Logos al pie de cada página ===== */
 .foot-logos{
   display:flex; justify-content:space-between; align-items:center;
   padding:8mm 12mm 10mm;
 }
 .foot-logos img{ height:16mm }
 
-/* saltos */
+/* Romper a la página siguiente */
 .page-break{ page-break-before:always }
 
+/* Ocultar elementos pantalla al imprimir (opcional) */
 @media print{
   .toolbar{display:none}
   .page{box-shadow:none; margin:0}
@@ -164,8 +160,19 @@ label{font-size:12px; color:var(--muted); display:block}
 </head>
 <body>
 
+<!-- ===== Barra: Nº de orden + botón ===== -->
 <div class="toolbar">
-  <button id="sendPrintBtn" class="btn" onclick="sendAndPrint()">Enviar orden a Trimax y Descargar DOC</button>
+  <div class="toolbar-inner">
+    <div class="order-wrap">
+      <span class="order-label">Nº de orden</span>
+      <span id="orderBox" class="order-box">—</span>
+      <span id="orderStatus" class="order-status"></span>
+    </div>
+
+    <button id="sendPrintBtn" class="btn" onclick="sendAndPrint()">
+      Enviar orden a Trimax y Descargar DOC
+    </button>
+  </div>
 </div>
 
 <form id="hoyaForm" class="sheet">
@@ -189,11 +196,11 @@ label{font-size:12px; color:var(--muted); display:block}
         <div class="col-6"></div>
 
         <div class="col-6">
-          <label>Nombre del paciente</label>
+          <label>Nombre</label>
           <input class="line" name="nombre" />
         </div>
         <div class="col-6">
-          <label>Apellidos del paciente</label>
+          <label>Apellidos</label>
           <input class="line" name="apellidos" />
         </div>
 
@@ -215,7 +222,6 @@ label{font-size:12px; color:var(--muted); display:block}
     <div class="section">
       <h3>PRESCRIPCIÓN</h3>
       <div class="two soft">
-        <!-- Ojo izquierdo -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
           <label>Esférico</label><input class="input" name="esf_oi">
@@ -226,12 +232,11 @@ label{font-size:12px; color:var(--muted); display:block}
           <label>Adición</label><input class="input" name="adic_oi">
           <label>Prisma</label>
           <div class="chips">
-            <label class="chip"><input type="radio" name="prisma_oi" value="Si"> Sí</label>
-            <label class="chip"><input type="radio" name="prisma_oi" value="No"> No</label>
+            <label><input type="radio" name="prisma_oi" value="Si"> Sí</label>
+            <label><input type="radio" name="prisma_oi" value="No"> No</label>
           </div>
         </div>
 
-        <!-- Ojo derecho -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
           <label>Esférico</label><input class="input" name="esf_od">
@@ -242,72 +247,44 @@ label{font-size:12px; color:var(--muted); display:block}
           <label>Adición</label><input class="input" name="adic_od">
           <label>Primer par de lentes</label>
           <div class="chips">
-            <label class="chip"><input type="radio" name="primer_par" value="Si"> Sí</label>
-            <label class="chip"><input type="radio" name="primer_par" value="No"> No</label>
+            <label><input type="radio" name="primer_par" value="Si"> Sí</label>
+            <label><input type="radio" name="primer_par" value="No"> No</label>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Información del prisma (Nasal/Temporal como botones) -->
+    <!-- Información del prisma -->
     <div class="section">
       <h3>INFORMACIÓN DEL PRISMA</h3>
       <div class="two soft">
-        <!-- OI -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
-            <div>
-              <label>Horizontal (valor)</label>
-              <input class="input" name="prisma_h_oi_val">
-            </div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="horiz_oi" value="Nasal"> Nasal</label>
-              <label class="chip"><input type="radio" name="horiz_oi" value="Temporal"> Temporal</label>
-            </div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end">
+            <div><label>Horizontal (valor)</label><input class="input" name="prisma_h_oi_val"></div>
+            <label class="chips"><input type="radio" name="horiz_oi" value="Nasal"> Nasal</label>
+            <label class="chips"><input type="radio" name="horiz_oi" value="Temporal"> Temporal</label>
           </div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:6px">
-            <div>
-              <label>Vertical (valor)</label>
-              <input class="input" name="prisma_v_oi_val">
-            </div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="vert_oi" value="Nasal"> Nasal</label>
-              <label class="chip"><input type="radio" name="vert_oi" value="Temporal"> Temporal</label>
-            </div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end;margin-top:6px">
+            <div><label>Vertical (valor)</label><input class="input" name="prisma_v_oi_val"></div>
+            <label class="chips"><input type="radio" name="vert_oi" value="Nasal"> Nasal</label>
+            <label class="chips"><input type="radio" name="vert_oi" value="Temporal"> Temporal</label>
           </div>
-
           <label style="margin-top:6px">Resultado</label><input class="input" name="prisma_res_oi">
         </div>
 
-        <!-- OD -->
         <div>
           <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
-            <div>
-              <label>Horizontal (valor)</label>
-              <input class="input" name="prisma_h_od_val">
-            </div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="horiz_od" value="Nasal"> Nasal</label>
-              <label class="chip"><input type="radio" name="horiz_od" value="Temporal"> Temporal</label>
-            </div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end">
+            <div><label>Horizontal (valor)</label><input class="input" name="prisma_h_od_val"></div>
+            <label class="chips"><input type="radio" name="horiz_od" value="Nasal"> Nasal</label>
+            <label class="chips"><input type="radio" name="horiz_od" value="Temporal"> Temporal</label>
           </div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:6px">
-            <div>
-              <label>Vertical (valor)</label>
-              <input class="input" name="prisma_v_od_val">
-            </div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="vert_od" value="Nasal"> Nasal</label>
-              <label class="chip"><input type="radio" name="vert_od" value="Temporal"> Temporal</label>
-            </div>
+          <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end;margin-top:6px">
+            <div><label>Vertical (valor)</label><input class="input" name="prisma_v_od_val"></div>
+            <label class="chips"><input type="radio" name="vert_od" value="Nasal"> Nasal</label>
+            <label class="chips"><input type="radio" name="vert_od" value="Temporal"> Temporal</label>
           </div>
-
           <label style="margin-top:6px">Resultado</label><input class="input" name="prisma_res_od">
         </div>
       </div>
@@ -364,7 +341,6 @@ label{font-size:12px; color:var(--muted); display:block}
   <!-- ============ PÁGINA 2 ============ -->
   <section class="page page-break">
 
-    <!-- Clasificación de actividades -->
     <div class="section">
       <h3>CLASIFICACIÓN DE IMPORTANCIA DE CADA ACTIVIDAD · 0 = poco importante, 5 = muy importante</h3>
       <table class="table">
@@ -515,7 +491,7 @@ label{font-size:12px; color:var(--muted); display:block}
       </div>
     </div>
 
-    <!-- Gafas anteriores + Receta previa -->
+    <!-- Gafas anteriores / Receta previa -->
     <div class="section">
       <h3>GAFAS ANTERIORES</h3>
       <div class="two soft">
@@ -538,29 +514,12 @@ label{font-size:12px; color:var(--muted); display:block}
             <div><label>Eje</label><input class="input" name="rp_eje_oi"></div>
             <div><label>Adición</label><input class="input" name="rp_adic_oi"></div>
           </div>
-          <!-- Prisma OI (nuevo) -->
-          <div style="margin-top:8px">
-            <label>Prisma</label>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="rp_prisma_oi" value="Si"> Sí</label>
-              <label class="chip"><input type="radio" name="rp_prisma_oi" value="No"> No</label>
-            </div>
-          </div>
-
-          <div style="font-weight:700;margin:12px 0 6px">Ojo derecho</div>
+          <div style="font-weight:700;margin:10px 0 6px">Ojo derecho</div>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
             <div><label>Esférico</label><input class="input" name="rp_esf_od"></div>
             <div><label>Cilíndrico</label><input class="input" name="rp_cil_od"></div>
             <div><label>Eje</label><input class="input" name="rp_eje_od"></div>
             <div><label>Adición</label><input class="input" name="rp_adic_od"></div>
-          </div>
-          <!-- Prisma OD (nuevo) -->
-          <div style="margin-top:8px">
-            <label>Prisma</label>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="rp_prisma_od" value="Si"> Sí</label>
-              <label class="chip"><input type="radio" name="rp_prisma_od" value="No"> No</label>
-            </div>
           </div>
         </div>
       </div>
@@ -588,16 +547,70 @@ label{font-size:12px; color:var(--muted); display:block}
 </form>
 
 <script>
+/* ===== URL de tu Apps Script desplegado (Web App, acceso “Cualquiera”) ===== */
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz8wYVJCHIBZPW2mzkpBkSUdGUzddeNmXcgpZmeTOfHHgiL1WcA1CMHIM8G4CaG5iMGEQ/exec";
 
+/* ====== Generación y persistencia del Nº de orden ====== */
+const ORDER_KEY = "trimax_order_id";
+const ORDER_SENT_KEY = "trimax_order_sent";
+
+function genOrderId(){
+  const d = new Date();
+  const pad = n => String(n).padStart(2,"0");
+  const y = d.getFullYear();
+  const M = pad(d.getMonth()+1);
+  const day = pad(d.getDate());
+  const h = pad(d.getHours());
+  const m = pad(d.getMinutes());
+  const s = pad(d.getSeconds());
+  const rand = Math.floor(Math.random()*10000).toString().padStart(4,"0");
+  return `TRX-${y}${M}${day}-${h}${m}${s}-${rand}`;
+}
+function getOrCreateOrderId(){
+  let id = localStorage.getItem(ORDER_KEY);
+  if(!id){ id = genOrderId(); localStorage.setItem(ORDER_KEY, id); }
+  return id;
+}
+function hydrateOrderUI(sent=false){
+  const box = document.getElementById("orderBox");
+  const status = document.getElementById("orderStatus");
+  const id = getOrCreateOrderId();
+  box.textContent = id;
+  if(sent){
+    box.classList.add("ok");
+    status.textContent = "Orden generada, alguien de Trimax se contactará con usted";
+    status.classList.add("show");
+  }else{
+    box.classList.remove("ok");
+    status.textContent = "";
+    status.classList.remove("show");
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const alreadySent = localStorage.getItem(ORDER_SENT_KEY) === "true";
+  hydrateOrderUI(alreadySent);
+});
+
+/* ===== Enviar a Sheets + marcar UI + imprimir ===== */
 async function sendAndPrint(){
   const btn = document.getElementById('sendPrintBtn');
   btn.disabled = true;
+
   try{
     const form = document.getElementById('hoyaForm');
     const fd = new FormData(form);
+
+    // Adjuntar Nº de orden y timestamp
+    const orderId = getOrCreateOrderId();
+    fd.append('order_id', orderId);
     fd.append('timestamp', new Date().toLocaleString());
+
     await fetch(WEB_APP_URL, { method:'POST', body:fd, mode:'no-cors' });
+
+    // Marcar UI en verde y guardar estado
+    localStorage.setItem(ORDER_SENT_KEY, "true");
+    hydrateOrderUI(true);
+
     setTimeout(() => window.print(), 300);
   }catch(e){
     alert('Error al enviar/imprimir: ' + e.message);
@@ -605,6 +618,18 @@ async function sendAndPrint(){
     btn.disabled = false;
   }
 }
+
+/* (Opcional) Si editan el nombre del cliente, renueva el Nº de orden */
+const clienteInput = document.addEventListener('DOMContentLoaded', () => {
+  const ci = document.querySelector('input[name="sistema"]');
+  if(ci){
+    ci.addEventListener('input', () => {
+      localStorage.removeItem(ORDER_KEY);
+      localStorage.removeItem(ORDER_SENT_KEY);
+      hydrateOrderUI(false);
+    });
+  }
+});
 </script>
 </body>
 </html>
