@@ -26,36 +26,66 @@ body{
   --rose:#f7ecf5;
   --rose-border:#ead7e7;
   --accent:#7a2b6c;
-  --success:#10b981;
+  --ok:#13c18d;
+  --ok-ink:#0a654d;
 }
 
-/* ===== Barra superior (orden + acciones) ===== */
-.toolbar{
-  position: sticky; top:0; z-index:20;
-  display:flex; flex-direction:column; gap:10px;
-  align-items:center; justify-content:center;
+/* ===== Barra superior: orden + botones ===== */
+.topbar{
+  position: sticky; top:0; z-index:30;
   background:var(--hoya-navy);
-  padding:12px 10px 16px;
+  padding:16px 0 20px;
   box-shadow:0 6px 16px rgba(2,6,23,.18);
 }
-.order-bar{
-  display:flex; align-items:center; gap:12px; color:#e6eefc;
-  background:rgba(255,255,255,.12); padding:10px 14px; border-radius:12px;
+.wrap{
+  width:210mm; max-width:100%; margin:0 auto; padding:0 12mm;
 }
-.order-label{font-weight:700; opacity:.9}
-.order-code{
-  background:#1f9d76; color:#fff; padding:8px 14px; border-radius:12px;
-  font-weight:800; letter-spacing:.2px; box-shadow:inset 0 -2px 0 rgba(0,0,0,.1);
+.order-row{
+  display:flex; align-items:center; gap:14px;
+  background:rgba(255,255,255,.08);
+  color:#e6eefc; border-radius:12px; padding:12px 14px;
 }
-.order-status{opacity:.9}
-.action-row{display:flex; gap:12px; align-items:center}
+.order-row .lbl{ font-weight:800; opacity:.9; min-width:98px }
+.order-pill{
+  display:inline-flex; align-items:center; gap:10px;
+  background:#5a91f0; color:#fff; padding:10px 16px;
+  border-radius:12px; font-weight:900; letter-spacing:.3px;
+  min-width:280px; justify-content:center;
+}
+.order-pill.ok{ background:var(--ok); color:#fff; }
+.order-status{
+  display:inline-flex; align-items:center; gap:8px; opacity:.9
+}
+.order-status .check{
+  width:16px; height:16px; border-radius:50%;
+  border:2px solid #cbe6ff; display:inline-block;
+  position:relative;
+}
+.order-status.ok .check{
+  border-color:#d1fae5;
+}
+.order-status.ok .check::after{
+  content:""; position:absolute; left:3px; top:0px;
+  width:8px; height:14px; border-right:3px solid #d1fae5; border-bottom:3px solid #d1fae5;
+  transform:rotate(40deg);
+}
+
+/* botones */
 .btn{
   background:#fff; color:var(--hoya-navy);
-  border:0; padding:10px 16px; border-radius:10px;
+  border:0; padding:12px 18px; border-radius:10px;
   font-weight:800; cursor:pointer;
+  box-shadow: 0 2px 0 rgba(0,0,0,.15) inset;
+  transition: transform .02s ease-in-out;
 }
-.btn.secondary{ background:#e6eefc; color:#0b3d91 }
+.btn:active{ transform: translateY(1px) }
 .btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-ghost{
+  background:transparent; color:#fff; border:2px solid #fff;
+}
+.top-actions{
+  display:flex; justify-content:center; gap:14px; margin-top:14px;
+}
 
 /* ===== Hoja ===== */
 .sheet{ width:210mm; margin:0 auto; }
@@ -70,7 +100,7 @@ body{
 .hero{
   position:relative;
   width: 210mm;
-  height: 73mm;               /* ajusta aquí si quieres menos alto */
+  height: 73mm;              /* puedes bajar a 65–70mm para “menos ancho visual” */
   margin: 0 auto;
   background:#ddd url('idmyself_header.jpg') center/cover no-repeat;
 }
@@ -107,12 +137,10 @@ body{
 .personal h3{color:#fff}
 .personal h3::before{background:#fff}
 .personal label{color:#e6eefc}
-
 .grid{display:grid; gap:10px 14px}
 .col-6{grid-column:span 6}
-.col-8{grid-column:span 8}
 .col-4{grid-column:span 4}
-
+.col-8{grid-column:span 8}
 .input, .line{
   width:100%; height:26px;
   border:none; border-bottom:1.5px solid rgba(255,255,255,.75);
@@ -133,13 +161,14 @@ label{font-size:12px; color:var(--muted); display:block}
 .two{display:grid; grid-template-columns: 1fr 1fr; gap:12mm}
 
 /* ===== Chips (radios) ===== */
-.chips{display:flex; gap:8px; align-items:center}
-.chips label{
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{
   border:1px solid #e2e8f0; border-radius:999px;
-  padding:4px 12px; font-size:11.5px; color:#111; cursor:pointer
+  padding:4px 10px; font-size:11.5px; color:#111; cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px;
 }
-.chips input{appearance:none; width:0; height:0; margin:0}
-.chips label:has(input:checked){
+.chip input{ appearance:none; width:0; height:0; margin:0 }
+.chip:has(input:checked){
   background:var(--rose); border-color:#e7cfe0; color:var(--accent);
 }
 
@@ -151,6 +180,25 @@ label{font-size:12px; color:var(--muted); display:block}
 .table{ border-collapse:collapse; width:100%; font-size:11.5px }
 .table th,.table td{ border:1px solid #eef2ff; padding:6px 8px; vertical-align:top }
 .table th{ background:#f8fafc; color:#334155; font-weight:800 }
+
+/* ==== Arreglo de tabla de Importancia (espaciado/anchos) ==== */
+.table.imp { 
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+.table.imp col.col-act     { width: 34%; }
+.table.imp col.col-score   { width: 6%;  }
+.table.imp col.col-details { width: 30%; }
+.table.imp th,.table.imp td{
+  border:1px solid #eef2ff; padding:8px 6px; vertical-align:middle; background:#fff
+}
+.table.imp th{ background:#f8fafc; color:#334155; font-weight:800; white-space:nowrap }
+.table.imp td.center { text-align:center }
+.table.imp input[type="radio"]{ transform:scale(1.05) }
+.table.imp .chips.flow{ display:flex; flex-wrap:wrap; gap:8px }
+.table.imp .chips.flow .chip{ margin:2px 0 }
 
 /* ===== Logos al pie de cada página ===== */
 .foot-logos{
@@ -164,25 +212,26 @@ label{font-size:12px; color:var(--muted); display:block}
 
 /* Ocultar elementos pantalla al imprimir (opcional) */
 @media print{
-  .toolbar{display:none}
+  .topbar{display:none}
   .page{box-shadow:none; margin:0}
 }
 </style>
 </head>
 <body>
 
-<!-- === Barra de orden y acciones === -->
-<div class="toolbar">
-  <div class="order-bar" id="orderBar">
-    <div class="order-label">Nº de orden</div>
-    <div class="order-code" id="orderCode">—</div>
-    <div class="order-status" id="orderStatus">• Pendiente de generar</div>
-  </div>
-  <div class="action-row">
-    <button id="genOrderBtn" class="btn secondary" type="button">Generar nueva orden</button>
-    <button id="sendPrintBtn" class="btn" type="button" onclick="sendAndPrint()">
-      Enviar orden a Trimax y Descargar DOC
-    </button>
+<!-- ======= Barra superior con número de orden + acciones ======= -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="order-row">
+      <div class="lbl">Nº de orden</div>
+      <div id="orderPill" class="order-pill">—</div>
+      <div id="orderStatus" class="order-status"><span class="check"></span> Orden pendiente</div>
+    </div>
+
+    <div class="top-actions">
+      <button id="sendBtn" class="btn" onclick="sendAndPrint(event)">Enviar orden a Trimax y Descargar DOC</button>
+      <button class="btn btn-ghost" onclick="newOrder(event)">Generar nueva orden</button>
+    </div>
   </div>
 </div>
 
@@ -200,6 +249,7 @@ label{font-size:12px; color:var(--muted); display:block}
     <div class="section personal">
       <h3>INFORMACIÓN PERSONAL</h3>
       <div class="grid" style="grid-template-columns: repeat(12, 1fr);">
+        <!-- Nombre del cliente (mantiene name="sistema" para la hoja) -->
         <div class="col-6">
           <label>Nombre del cliente</label>
           <input class="line" name="sistema" placeholder="Nombre del cliente" />
@@ -218,8 +268,8 @@ label{font-size:12px; color:var(--muted); display:block}
         <div class="col-4">
           <label>Sexo</label>
           <div class="radio-row">
-            <label><input type="radio" name="sexo" value="Masculino"> Masculino</label>
-            <label><input type="radio" name="sexo" value="Femenino"> Femenino</label>
+            <label class="chip"><input type="radio" name="sexo" value="Masculino"><span>Masculino</span></label>
+            <label class="chip"><input type="radio" name="sexo" value="Femenino"><span>Femenino</span></label>
           </div>
         </div>
         <div class="col-8">
@@ -241,12 +291,27 @@ label{font-size:12px; color:var(--muted); display:block}
             <div><label>Cilíndrico</label><input class="input" name="cil_oi"></div>
             <div><label>Eje</label><input class="input" name="eje_oi"></div>
           </div>
+
           <label>Adición</label><input class="input" name="adic_oi">
+
           <label>Prisma</label>
           <div class="chips">
-            <label><input type="radio" name="prisma_oi" value="Si"> Sí</label>
-            <label><input type="radio" name="prisma_oi" value="No"> No</label>
+            <label class="chip"><input type="radio" name="prisma_oi" value="Si"><span>Sí</span></label>
+            <label class="chip"><input type="radio" name="prisma_oi" value="No"><span>No</span></label>
           </div>
+
+          <!-- Prisma OI (horizontal / vertical con chips Nasal/Temporal) -->
+          <div style="margin-top:8px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end">
+            <div><label>Horizontal (valor)</label><input class="input" name="prisma_h_oi_val"></div>
+            <label class="chip"><input type="radio" name="horiz_oi" value="Nasal"><span>Nasal</span></label>
+            <label class="chip"><input type="radio" name="horiz_oi" value="Temporal"><span>Temporal</span></label>
+          </div>
+          <div style="margin-top:8px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end">
+            <div><label>Vertical (valor)</label><input class="input" name="prisma_v_oi_val"></div>
+            <label class="chip"><input type="radio" name="vert_oi" value="Nasal"><span>Nasal</span></label>
+            <label class="chip"><input type="radio" name="vert_oi" value="Temporal"><span>Temporal</span></label>
+          </div>
+          <label style="margin-top:8px">Resultado</label><input class="input" name="prisma_res_oi">
         </div>
 
         <!-- Ojo derecho -->
@@ -257,78 +322,27 @@ label{font-size:12px; color:var(--muted); display:block}
             <div><label>Cilíndrico</label><input class="input" name="cil_od"></div>
             <div><label>Eje</label><input class="input" name="eje_od"></div>
           </div>
+
           <label>Adición</label><input class="input" name="adic_od">
+
           <label>Primer par de lentes</label>
           <div class="chips">
-            <label><input type="radio" name="primer_par" value="Si"> Sí</label>
-            <label><input type="radio" name="primer_par" value="No"> No</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Información del prisma (AJUSTADO: Nasal/Temporal como chips) -->
-    <div class="section">
-      <h3>INFORMACIÓN DEL PRISMA</h3>
-      <div class="two soft">
-        <!-- OI -->
-        <div>
-          <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo izquierdo</div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
-            <div>
-              <label>Horizontal (valor)</label>
-              <input class="input" name="prisma_h_oi_val">
-            </div>
-            <div class="chips">
-              <label><input type="radio" name="horiz_oi" value="Nasal"> Nasal</label>
-              <label><input type="radio" name="horiz_oi" value="Temporal"> Temporal</label>
-            </div>
+            <label class="chip"><input type="radio" name="primer_par" value="Si"><span>Sí</span></label>
+            <label class="chip"><input type="radio" name="primer_par" value="No"><span>No</span></label>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:6px">
-            <div>
-              <label>Vertical (valor)</label>
-              <input class="input" name="prisma_v_oi_val">
-            </div>
-            <div class="chips">
-              <label><input type="radio" name="vert_oi" value="Nasal"> Nasal</label>
-              <label><input type="radio" name="vert_oi" value="Temporal"> Temporal</label>
-            </div>
+          <!-- Prisma OD -->
+          <div style="margin-top:8px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end">
+            <div><label>Horizontal (valor)</label><input class="input" name="prisma_h_od_val"></div>
+            <label class="chip"><input type="radio" name="horiz_od" value="Nasal"><span>Nasal</span></label>
+            <label class="chip"><input type="radio" name="horiz_od" value="Temporal"><span>Temporal</span></label>
           </div>
-
-          <label style="margin-top:6px">Resultado</label>
-          <input class="input" name="prisma_res_oi">
-        </div>
-
-        <!-- OD -->
-        <div>
-          <div style="font-weight:700;color:#7a2b6c;margin-bottom:6px">Ojo derecho</div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end">
-            <div>
-              <label>Horizontal (valor)</label>
-              <input class="input" name="prisma_h_od_val">
-            </div>
-            <div class="chips">
-              <label><input type="radio" name="horiz_od" value="Nasal"> Nasal</label>
-              <label><input type="radio" name="horiz_od" value="Temporal"> Temporal</label>
-            </div>
+          <div style="margin-top:8px;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end">
+            <div><label>Vertical (valor)</label><input class="input" name="prisma_v_od_val"></div>
+            <label class="chip"><input type="radio" name="vert_od" value="Nasal"><span>Nasal</span></label>
+            <label class="chip"><input type="radio" name="vert_od" value="Temporal"><span>Temporal</span></label>
           </div>
-
-          <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-top:6px">
-            <div>
-              <label>Vertical (valor)</label>
-              <input class="input" name="prisma_v_od_val">
-            </div>
-            <div class="chips">
-              <label><input type="radio" name="vert_od" value="Nasal"> Nasal</label>
-              <label><input type="radio" name="vert_od" value="Temporal"> Temporal</label>
-            </div>
-          </div>
-
-          <label style="margin-top:6px">Resultado</label>
-          <input class="input" name="prisma_res_od">
+          <label style="margin-top:8px">Resultado</label><input class="input" name="prisma_res_od">
         </div>
       </div>
     </div>
@@ -340,33 +354,33 @@ label{font-size:12px; color:var(--muted); display:block}
         <div>
           <label>Ambientes interiores</label>
           <div class="chips">
-            <label><input type="radio" name="int" value="0%">0%</label>
-            <label><input type="radio" name="int" value="10%">10%</label>
-            <label><input type="radio" name="int" value="20%">20%</label>
-            <label><input type="radio" name="int" value="30%">30%</label>
-            <label><input type="radio" name="int" value="40%">40%</label>
-            <label><input type="radio" name="int" value="50%">50%</label>
-            <label><input type="radio" name="int" value="60%">60%</label>
-            <label><input type="radio" name="int" value="70%">70%</label>
-            <label><input type="radio" name="int" value="80%">80%</label>
-            <label><input type="radio" name="int" value="90%">90%</label>
-            <label><input type="radio" name="int" value="100%">100%</label>
+            <label class="chip"><input type="radio" name="int" value="0%"><span>0%</span></label>
+            <label class="chip"><input type="radio" name="int" value="10%"><span>10%</span></label>
+            <label class="chip"><input type="radio" name="int" value="20%"><span>20%</span></label>
+            <label class="chip"><input type="radio" name="int" value="30%"><span>30%</span></label>
+            <label class="chip"><input type="radio" name="int" value="40%"><span>40%</span></label>
+            <label class="chip"><input type="radio" name="int" value="50%"><span>50%</span></label>
+            <label class="chip"><input type="radio" name="int" value="60%"><span>60%</span></label>
+            <label class="chip"><input type="radio" name="int" value="70%"><span>70%</span></label>
+            <label class="chip"><input type="radio" name="int" value="80%"><span>80%</span></label>
+            <label class="chip"><input type="radio" name="int" value="90%"><span>90%</span></label>
+            <label class="chip"><input type="radio" name="int" value="100%"><span>100%</span></label>
           </div>
         </div>
         <div>
           <label>Ambientes exteriores</label>
           <div class="chips">
-            <label><input type="radio" name="ext" value="0%">0%</label>
-            <label><input type="radio" name="ext" value="10%">10%</label>
-            <label><input type="radio" name="ext" value="20%">20%</label>
-            <label><input type="radio" name="ext" value="30%">30%</label>
-            <label><input type="radio" name="ext" value="40%">40%</label>
-            <label><input type="radio" name="ext" value="50%">50%</label>
-            <label><input type="radio" name="ext" value="60%">60%</label>
-            <label><input type="radio" name="ext" value="70%">70%</label>
-            <label><input type="radio" name="ext" value="80%">80%</label>
-            <label><input type="radio" name="ext" value="90%">90%</label>
-            <label><input type="radio" name="ext" value="100%">100%</label>
+            <label class="chip"><input type="radio" name="ext" value="0%"><span>0%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="10%"><span>10%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="20%"><span>20%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="30%"><span>30%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="40%"><span>40%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="50%"><span>50%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="60%"><span>60%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="70%"><span>70%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="80%"><span>80%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="90%"><span>90%</span></label>
+            <label class="chip"><input type="radio" name="ext" value="100%"><span>100%</span></label>
           </div>
         </div>
       </div>
@@ -384,121 +398,139 @@ label{font-size:12px; color:var(--muted); display:block}
   <!-- ============ PÁGINA 2 ============ -->
   <section class="page page-break">
 
+    <!-- Clasificación de actividades -->
     <div class="section">
       <h3>CLASIFICACIÓN DE IMPORTANCIA DE CADA ACTIVIDAD · 0 = poco importante, 5 = muy importante</h3>
-      <table class="table">
+
+      <table class="table imp">
+        <colgroup>
+          <col class="col-act">
+          <col class="col-score"><col class="col-score"><col class="col-score">
+          <col class="col-score"><col class="col-score"><col class="col-score">
+          <col class="col-details">
+        </colgroup>
         <thead>
-          <tr><th style="width:42%">Actividad</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>Detalles</th></tr>
+          <tr>
+            <th>Actividad</th>
+            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+            <th>Detalles</th>
+          </tr>
         </thead>
         <tbody>
           <tr>
             <td>Viendo televisión</td>
-            <td><input type="radio" name="tv" value="0"></td>
-            <td><input type="radio" name="tv" value="1"></td>
-            <td><input type="radio" name="tv" value="2"></td>
-            <td><input type="radio" name="tv" value="3"></td>
-            <td><input type="radio" name="tv" value="4"></td>
-            <td><input type="radio" name="tv" value="5"></td>
+            <td class="center"><input type="radio" name="tv" value="0"></td>
+            <td class="center"><input type="radio" name="tv" value="1"></td>
+            <td class="center"><input type="radio" name="tv" value="2"></td>
+            <td class="center"><input type="radio" name="tv" value="3"></td>
+            <td class="center"><input type="radio" name="tv" value="4"></td>
+            <td class="center"><input type="radio" name="tv" value="5"></td>
             <td></td>
           </tr>
+
           <tr>
             <td>Hacer compras</td>
-            <td><input type="radio" name="compras" value="0"></td>
-            <td><input type="radio" name="compras" value="1"></td>
-            <td><input type="radio" name="compras" value="2"></td>
-            <td><input type="radio" name="compras" value="3"></td>
-            <td><input type="radio" name="compras" value="4"></td>
-            <td><input type="radio" name="compras" value="5"></td>
+            <td class="center"><input type="radio" name="compras" value="0"></td>
+            <td class="center"><input type="radio" name="compras" value="1"></td>
+            <td class="center"><input type="radio" name="compras" value="2"></td>
+            <td class="center"><input type="radio" name="compras" value="3"></td>
+            <td class="center"><input type="radio" name="compras" value="4"></td>
+            <td class="center"><input type="radio" name="compras" value="5"></td>
             <td></td>
           </tr>
+
           <tr>
             <td>Conducir</td>
-            <td><input type="radio" name="drive" value="0"></td>
-            <td><input type="radio" name="drive" value="1"></td>
-            <td><input type="radio" name="drive" value="2"></td>
-            <td><input type="radio" name="drive" value="3"></td>
-            <td><input type="radio" name="drive" value="4"></td>
-            <td><input type="radio" name="drive" value="5"></td>
+            <td class="center"><input type="radio" name="drive" value="0"></td>
+            <td class="center"><input type="radio" name="drive" value="1"></td>
+            <td class="center"><input type="radio" name="drive" value="2"></td>
+            <td class="center"><input type="radio" name="drive" value="3"></td>
+            <td class="center"><input type="radio" name="drive" value="4"></td>
+            <td class="center"><input type="radio" name="drive" value="5"></td>
             <td>
-              <div class="chips">
-                <label><input type="checkbox" name="drive_auto"> Auto</label>
-                <label><input type="checkbox" name="drive_bus"> Autobús</label>
-                <label><input type="checkbox" name="drive_moto"> Moto</label>
-                <label><input type="checkbox" name="drive_tren"> Tren</label>
-                <label><input type="checkbox" name="drive_camion"> Camión</label>
+              <div class="chips flow">
+                <label class="chip"><input type="checkbox" name="drive_auto"><span>Auto</span></label>
+                <label class="chip"><input type="checkbox" name="drive_bus"><span>Autobús</span></label>
+                <label class="chip"><input type="checkbox" name="drive_moto"><span>Moto</span></label>
+                <label class="chip"><input type="checkbox" name="drive_tren"><span>Tren</span></label>
+                <label class="chip"><input type="checkbox" name="drive_camion"><span>Camión</span></label>
               </div>
             </td>
           </tr>
+
           <tr>
             <td>Vida profesional</td>
-            <td><input type="radio" name="vida" value="0"></td>
-            <td><input type="radio" name="vida" value="1"></td>
-            <td><input type="radio" name="vida" value="2"></td>
-            <td><input type="radio" name="vida" value="3"></td>
-            <td><input type="radio" name="vida" value="4"></td>
-            <td><input type="radio" name="vida" value="5"></td>
+            <td class="center"><input type="radio" name="vida" value="0"></td>
+            <td class="center"><input type="radio" name="vida" value="1"></td>
+            <td class="center"><input type="radio" name="vida" value="2"></td>
+            <td class="center"><input type="radio" name="vida" value="3"></td>
+            <td class="center"><input type="radio" name="vida" value="4"></td>
+            <td class="center"><input type="radio" name="vida" value="5"></td>
             <td>
-              <div class="chips">
-                <label><input type="checkbox" name="work_cerca"> Cerca</label>
-                <label><input type="checkbox" name="work_inter_cercano"> Intermedio y cercano</label>
-                <label><input type="checkbox" name="work_inter_laboral"> Intermedio laboral</label>
-                <label><input type="checkbox" name="work_lejos"> Lejos</label>
-                <label><input type="checkbox" name="work_inter_lejano"> Intermedio y lejano</label>
+              <div class="chips flow">
+                <label class="chip"><input type="checkbox" name="work_cerca"><span>Cerca</span></label>
+                <label class="chip"><input type="checkbox" name="work_inter_cercano"><span>Intermedio y cercano</span></label>
+                <label class="chip"><input type="checkbox" name="work_inter_laboral"><span>Intermedio laboral</span></label>
+                <label class="chip"><input type="checkbox" name="work_lejos"><span>Lejos</span></label>
+                <label class="chip"><input type="checkbox" name="work_inter_lejano"><span>Intermedio y lejano</span></label>
               </div>
             </td>
           </tr>
+
           <tr>
             <td>Deportes y recreación</td>
-            <td><input type="radio" name="sport" value="0"></td>
-            <td><input type="radio" name="sport" value="1"></td>
-            <td><input type="radio" name="sport" value="2"></td>
-            <td><input type="radio" name="sport" value="3"></td>
-            <td><input type="radio" name="sport" value="4"></td>
-            <td><input type="radio" name="sport" value="5"></td>
+            <td class="center"><input type="radio" name="sport" value="0"></td>
+            <td class="center"><input type="radio" name="sport" value="1"></td>
+            <td class="center"><input type="radio" name="sport" value="2"></td>
+            <td class="center"><input type="radio" name="sport" value="3"></td>
+            <td class="center"><input type="radio" name="sport" value="4"></td>
+            <td class="center"><input type="radio" name="sport" value="5"></td>
             <td>
-              <div class="chips">
-                <label><input type="checkbox" name="sport_gimnasia"> Gimnasia</label>
-                <label><input type="checkbox" name="sport_correr"> Correr y caminar</label>
-                <label><input type="checkbox" name="sport_golf"> Golf</label>
-                <label><input type="checkbox" name="sport_tenis"> Tenis</label>
-                <label><input type="checkbox" name="sport_pelota"> Juegos de pelota</label>
-                <label><input type="checkbox" name="sport_ciclismo"> Ciclismo</label>
+              <div class="chips flow">
+                <label class="chip"><input type="checkbox" name="sport_gimnasia"><span>Gimnasia</span></label>
+                <label class="chip"><input type="checkbox" name="sport_correr"><span>Correr y caminar</span></label>
+                <label class="chip"><input type="checkbox" name="sport_golf"><span>Golf</span></label>
+                <label class="chip"><input type="checkbox" name="sport_tenis"><span>Tenis</span></label>
+                <label class="chip"><input type="checkbox" name="sport_pelota"><span>Juegos de pelota</span></label>
+                <label class="chip"><input type="checkbox" name="sport_ciclismo"><span>Ciclismo</span></label>
               </div>
             </td>
           </tr>
+
           <tr>
             <td>Computadoras y dispositivos digitales</td>
-            <td><input type="radio" name="comp" value="0"></td>
-            <td><input type="radio" name="comp" value="1"></td>
-            <td><input type="radio" name="comp" value="2"></td>
-            <td><input type="radio" name="comp" value="3"></td>
-            <td><input type="radio" name="comp" value="4"></td>
-            <td><input type="radio" name="comp" value="5"></td>
+            <td class="center"><input type="radio" name="comp" value="0"></td>
+            <td class="center"><input type="radio" name="comp" value="1"></td>
+            <td class="center"><input type="radio" name="comp" value="2"></td>
+            <td class="center"><input type="radio" name="comp" value="3"></td>
+            <td class="center"><input type="radio" name="comp" value="4"></td>
+            <td class="center"><input type="radio" name="comp" value="5"></td>
             <td>
-              <div class="chips">
-                <label><input type="checkbox" name="comp_pc"> Computador</label>
-                <label><input type="checkbox" name="comp_portatil"> Computadora portátil</label>
-                <label><input type="checkbox" name="comp_varios"> Varios dispositivos</label>
-                <label><input type="checkbox" name="comp_tableta"> Tableta</label>
-                <label><input type="checkbox" name="comp_phone"> Teléfonos inteligentes</label>
+              <div class="chips flow">
+                <label class="chip"><input type="checkbox" name="comp_pc"><span>Computador</span></label>
+                <label class="chip"><input type="checkbox" name="comp_portatil"><span>Computadora portátil</span></label>
+                <label class="chip"><input type="checkbox" name="comp_varios"><span>Varios dispositivos</span></label>
+                <label class="chip"><input type="checkbox" name="comp_tableta"><span>Tableta</span></label>
+                <label class="chip"><input type="checkbox" name="comp_phone"><span>Teléfonos inteligentes</span></label>
               </div>
             </td>
           </tr>
+
           <tr>
             <td>Lectura</td>
-            <td><input type="radio" name="lect" value="0"></td>
-            <td><input type="radio" name="lect" value="1"></td>
-            <td><input type="radio" name="lect" value="2"></td>
-            <td><input type="radio" name="lect" value="3"></td>
-            <td><input type="radio" name="lect" value="4"></td>
-            <td><input type="radio" name="lect" value="5"></td>
+            <td class="center"><input type="radio" name="lect" value="0"></td>
+            <td class="center"><input type="radio" name="lect" value="1"></td>
+            <td class="center"><input type="radio" name="lect" value="2"></td>
+            <td class="center"><input type="radio" name="lect" value="3"></td>
+            <td class="center"><input type="radio" name="lect" value="4"></td>
+            <td class="center"><input type="radio" name="lect" value="5"></td>
             <td>
-              <div class="chips">
-                <label><input type="checkbox" name="lect_libro"> Libro</label>
-                <label><input type="checkbox" name="lect_digital"> Dispositivos digitales</label>
-                <label><input type="checkbox" name="lect_periodico"> Periódico</label>
-                <label><input type="checkbox" name="lect_revista"> Revista</label>
-                <label><input type="checkbox" name="lect_varios"> Varios medios</label>
+              <div class="chips flow">
+                <label class="chip"><input type="checkbox" name="lect_libro"><span>Libro</span></label>
+                <label class="chip"><input type="checkbox" name="lect_digital"><span>Dispositivos digitales</span></label>
+                <label class="chip"><input type="checkbox" name="lect_periodico"><span>Periódico</span></label>
+                <label class="chip"><input type="checkbox" name="lect_revista"><span>Revista</span></label>
+                <label class="chip"><input type="checkbox" name="lect_varios"><span>Varios medios</span></label>
               </div>
             </td>
           </tr>
@@ -542,8 +574,8 @@ label{font-size:12px; color:var(--muted); display:block}
           <label>Tipo de lente</label><input class="input" name="tipo_lente">
           <label style="margin-top:6px">Proveedor</label>
           <div class="chips">
-            <label><input type="radio" name="proveedor" value="HOYA"> HOYA</label>
-            <label><input type="radio" name="proveedor" value="Otro"> Otro</label>
+            <label class="chip"><input type="radio" name="proveedor" value="HOYA"><span>HOYA</span></label>
+            <label class="chip"><input type="radio" name="proveedor" value="Otro"><span>Otro</span></label>
           </div>
           <label style="margin-top:6px">Diseño</label><input class="input" name="diseno">
           <label style="margin-top:6px">Longitud del pasillo</label><input class="input" name="longitud_pasillo">
@@ -572,11 +604,11 @@ label{font-size:12px; color:var(--muted); display:block}
     <div class="section">
       <h3>NIVEL DE SATISFACCIÓN</h3>
       <div class="chips">
-        <label><input type="radio" name="satisfaccion" value="Muy satisfecho"> Muy satisfecho</label>
-        <label><input type="radio" name="satisfaccion" value="Satisfecho"> Satisfecho</label>
-        <label><input type="radio" name="satisfaccion" value="Neutral"> Neutral</label>
-        <label><input type="radio" name="satisfaccion" value="Insatisfecho"> Insatisfecho</label>
-        <label><input type="radio" name="satisfaccion" value="Muy insatisfecho"> Muy insatisfecho</label>
+        <label class="chip"><input type="radio" name="satisfaccion" value="Muy satisfecho"><span>Muy satisfecho</span></label>
+        <label class="chip"><input type="radio" name="satisfaccion" value="Satisfecho"><span>Satisfecho</span></label>
+        <label class="chip"><input type="radio" name="satisfaccion" value="Neutral"><span>Neutral</span></label>
+        <label class="chip"><input type="radio" name="satisfaccion" value="Insatisfecho"><span>Insatisfecho</span></label>
+        <label class="chip"><input type="radio" name="satisfaccion" value="Muy insatisfecho"><span>Muy insatisfecho</span></label>
       </div>
     </div>
 
@@ -587,73 +619,84 @@ label{font-size:12px; color:var(--muted); display:block}
 
   </section>
 
+  <!-- campo oculto para mandar Nº de orden -->
+  <input type="hidden" name="order_id" id="orderIdField" />
 </form>
 
 <script>
-/* ====== Config ====== */
+/* ======= CONFIG ======= */
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz8wYVJCHIBZPW2mzkpBkSUdGUzddeNmXcgpZmeTOfHHgiL1WcA1CMHIM8G4CaG5iMGEQ/exec";
 
-/* ====== Nº de orden ====== */
-const orderCodeEl = document.getElementById('orderCode');
-const orderStatusEl = document.getElementById('orderStatus');
-const genOrderBtn = document.getElementById('genOrderBtn');
-const sendPrintBtn = document.getElementById('sendPrintBtn');
-
-function generateOrderCode(){
+/* ======= Utilidades ======= */
+function pad(n){return String(n).padStart(2,'0')}
+function generateOrderId(){
   const d = new Date();
-  const pad = n=>String(n).padStart(2,'0');
-  const y = d.getFullYear();
-  const stamp = `${y}${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
-  const rand = Math.floor(Math.random()*9000+1000);
-  return `TRX-${stamp}-${rand}`;
+  const yyyy = d.getFullYear();
+  const mm = pad(d.getMonth()+1);
+  const dd = pad(d.getDate());
+  const hh = pad(d.getHours());
+  const mi = pad(d.getMinutes());
+  const ss = pad(d.getSeconds());
+  const rand = Math.floor(1000 + Math.random()*9000);
+  return `TRX-${yyyy}${mm}${dd}-${hh}${mi}${ss}-${rand}`;
+}
+function setOrderPill(id, ok=false){
+  const pill = document.getElementById('orderPill');
+  pill.textContent = id;
+  pill.classList.toggle('ok', ok);
+  const st = document.getElementById('orderStatus');
+  st.classList.toggle('ok', ok);
+  st.innerHTML = ok ? '<span class="check"></span> Orden generada, alguien de Trimax se contactará con usted'
+                    : '<span class="check"></span> Orden pendiente';
 }
 
-function resetFormForNewOrder(){
-  document.getElementById('hoyaForm').reset();
-  orderCodeEl.textContent = '—';
-  orderCodeEl.style.background = '#1f9d76';
-  orderStatusEl.textContent = '• Pendiente de generar';
+/* ======= Nueva orden (resetea) ======= */
+function newOrder(e){
+  if(e) e.preventDefault();
+  const form = document.getElementById('hoyaForm');
+  form.reset();
+  const id = generateOrderId();
+  document.getElementById('orderIdField').value = id;
+  setOrderPill(id, false);
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-genOrderBtn.addEventListener('click', ()=>{
-  const code = generateOrderCode();
-  orderCodeEl.textContent = code;
-  orderCodeEl.style.background = '#1f9d76';
-  orderStatusEl.textContent = '• Número de orden generado. Complete el formulario y envíe.';
-});
-
-/* ====== Enviar + imprimir ====== */
-async function sendAndPrint(){
-  const code = orderCodeEl.textContent.trim();
-  if(!code || code === '—'){
-    alert('Primero genera un Nº de orden con el botón "Generar nueva orden".');
-    return;
-  }
-
-  sendPrintBtn.disabled = true;
-  genOrderBtn.disabled = true;
+/* ======= Enviar a Sheets + Imprimir ======= */
+async function sendAndPrint(e){
+  e.preventDefault();
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
 
   try{
     const form = document.getElementById('hoyaForm');
     const fd = new FormData(form);
+    if(!fd.get('order_id')){ // por si acaso
+      const id = generateOrderId();
+      fd.set('order_id', id);
+      document.getElementById('orderIdField').value = id;
+    }
+
     fd.append('timestamp', new Date().toLocaleString());
-    fd.append('orden', code);
 
     await fetch(WEB_APP_URL, { method:'POST', body:fd, mode:'no-cors' });
 
-    // Estado visual
-    orderCodeEl.style.background = 'var(--success)';
-    orderStatusEl.textContent = '✓ Orden generada, alguien de Trimax se contactará con usted';
+    // Marca orden como generada (verde + check)
+    setOrderPill(fd.get('order_id'), true);
 
+    // Imprimir / guardar PDF
     setTimeout(() => window.print(), 300);
-  }catch(e){
-    alert('Error al enviar/imprimir: ' + e.message);
+
+  }catch(err){
+    alert('Error al enviar/imprimir: ' + err.message);
   }finally{
-    sendPrintBtn.disabled = false;
-    genOrderBtn.disabled = false;
+    btn.disabled = false;
   }
 }
+
+/* ======= Init ======= */
+newOrder(); // crea primer número de orden
 </script>
 </body>
 </html>
+
 
